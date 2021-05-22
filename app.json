@@ -1,0 +1,24 @@
+{
+  "name": "clonebot-ui",
+  "description": "Telegram's best Open Source ALL-In-One Multi Purpose RoBot. Create your Fork now.",
+  "keywords": ["telegram", "best", "Media", "cloning", "copying", "robot"],
+  "logo": "https://cdn.dribbble.com/users/1658045/screenshots/4999712/clonelogo-01.png",
+  "website": "https://github.com/m4mallu/conebot",
+  "repository": "https://github.com/m4mallu/clonebot-ui",
+  "env": {
+        "APP_ID": {"description": "Get this value from https://my.telegram.org", "required": true},
+        "API_HASH": {"description": "Get this value from https://my.telegram.org" , "required": true},
+        "TG_BOT_TOKEN": {"description": "Get Bot Token From BotFather Bot","required": true},
+        "TG_USER_SESSION": {"description": "String Session from an admin user. Go to: t.ly/GxsB ","required": true},
+        "ENV": {"description": "Set this to ANYTHING","value": "ANYTHING"}
+  },
+  "buildpacks": [
+    {"url": "heroku/python"}
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}
