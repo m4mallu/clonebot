@@ -78,3 +78,5 @@ python3 main.py
     <img alt="Renjith Mangal" src ="https://telegra.ph/file/1001b7b08b0e9c266f780.png" width="150" />
   </a>
 </p>
+
+[𝐃𝐢𝐬𝐜𝐥𝐚𝐢𝐦𝐛𝐞𝐫:](https://telegra.ph/Disclaimer---Clonebot-05-25)
