@@ -4,6 +4,7 @@ from bot import Bot
 from presets import Presets
 from pyrogram import filters, Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import FloodWait
 from init import source_chat, destination_chat, source_message_id, dest_message_id, help_message_id
 
 
@@ -59,22 +60,41 @@ async def start_bot(client: Bot, message: Message):
 async def chat_reply(client: Bot, message: Message):
     usr = int(message.from_user.id)
     user_bot_me = await client.USER.get_me()
+    chat_status = []
     try:
         if message.reply_to_message.message_id == source_message_id[usr]:
             if str(message.text).startswith('-100') and message.text[1:].isdigit():
-                bot_msg = await message.reply_text(text=Presets.WAIT_MSG)
-                await asyncio.sleep(1)
-                try:
-                    if destination_chat[usr] == message.text:
-                        await message.delete()
-                        await client.delete_messages(message.chat.id, source_message_id[usr])
-                        await bot_msg.edit(Presets.CHAT_DUPLICATED_MSG)
-                        await asyncio.sleep(5)
-                        await bot_msg.delete()
-                        await start_bot(client, message)
-                        return
-                except Exception:
-                    pass
+                chat_id = int(message.text)
+            elif str(message.text).startswith('@') and bool(str(message.text).isdigit()) == bool(0):
+                chat_id = str(message.text)
+            else:
+                return
+            bot_msg = await message.reply_text(text=Presets.WAIT_MSG)
+            await asyncio.sleep(1)
+            try:
+                chat_status = await client.USER.get_chat(chat_id)
+            except FloodWait as e:
+                await asyncio.sleep(e.x)
+            except Exception:
+                await client.delete_messages(message.chat.id, source_message_id[usr])
+                await bot_msg.edit(Presets.INVALID_CHAT_ID)
+                await message.delete()
+                await asyncio.sleep(3)
+                await bot_msg.delete()
+                await start_bot(client, message)
+                return
+            try:
+                if destination_chat[usr] == message.text:
+                    await message.delete()
+                    await client.delete_messages(message.chat.id, source_message_id[usr])
+                    await bot_msg.edit(Presets.CHAT_DUPLICATED_MSG)
+                    await asyncio.sleep(5)
+                    await bot_msg.delete()
+                    await start_bot(client, message)
+                    return
+            except Exception:
+                pass
+            if bool(chat_status.username) == bool(0):
                 try:
                     await client.USER.get_chat_member(chat_id=int(message.text), user_id=int(user_bot_me.id))
                 except Exception:
@@ -86,23 +106,23 @@ async def chat_reply(client: Bot, message: Message):
                     await bot_msg.delete()
                     await start_bot(client, message)
                     return
-                await client.delete_messages(message.chat.id, source_message_id[usr])
-                source_chat[usr] = message.text
-                await message.delete()
-                source_message_id.pop(usr)
-                await bot_msg.edit(Presets.SOURCE_CONFIRM.format(source_chat[usr]))
-                await asyncio.sleep(2)
-                await start_bot(client, message)
-                return
-            else:
-                await client.delete_messages(message.chat.id, source_message_id[usr])
-                warn = await message.reply_text(Presets.INVALID_CHAT_ID)
-                await message.delete()
-                source_message_id.pop(usr)
-                await asyncio.sleep(3)
-                await warn.delete()
-                await start_bot(client, message)
-                return
+            await client.delete_messages(message.chat.id, source_message_id[usr])
+            source_chat[usr] = message.text
+            await message.delete()
+            source_message_id.pop(usr)
+            await bot_msg.edit(Presets.SOURCE_CONFIRM.format(source_chat[usr]))
+            await asyncio.sleep(2)
+            await start_bot(client, message)
+            return
+        else:
+            await client.delete_messages(message.chat.id, source_message_id[usr])
+            warn = await message.reply_text(Presets.INVALID_CHAT_ID)
+            await message.delete()
+            source_message_id.pop(usr)
+            await asyncio.sleep(3)
+            await warn.delete()
+            await start_bot(client, message)
+            return
     except Exception:
         if message.reply_to_message.message_id == dest_message_id[usr]:
             if str(message.text).startswith('-100') and message.text[1:].isdigit():

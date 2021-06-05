@@ -12,7 +12,7 @@ from pyrogram.types import CallbackQuery, ForceReply
 # --------------------------- Source Button Action ------------------------------ #
 @Client.on_callback_query(filters.regex(r'^source_btn$'))
 async def source_chat_config(client: Bot, cb: CallbackQuery):
-    usr = int(cb.message.chat.id)
+    usr = int(cb.from_user.id)
     await cb.message.delete()
     source = await client.send_message(
         chat_id=cb.message.chat.id,
@@ -29,7 +29,7 @@ async def source_chat_config(client: Bot, cb: CallbackQuery):
 # --------------------------- Destination Button Action ------------------------- #
 @Client.on_callback_query(filters.regex(r'^dest_btn$'))
 async def dest_chat_config(client: Bot, cb: CallbackQuery):
-    usr = int(cb.message.chat.id)
+    usr = int(cb.from_user.id)
     await cb.message.delete()
     dest = await client.send_message(
         chat_id=cb.message.chat.id,
@@ -46,7 +46,7 @@ async def dest_chat_config(client: Bot, cb: CallbackQuery):
 # ---------------------------- Chat View Button Action -------------------------- #
 @Client.on_callback_query(filters.regex(r'^view_btn$'))
 async def view_config(client: Bot, cb: CallbackQuery):
-    usr = int(cb.message.chat.id)
+    usr = int(cb.from_user.id)
     if usr in source_chat and destination_chat:
         await cb.message.delete()
         await client.send_message(
@@ -63,7 +63,7 @@ async def view_config(client: Bot, cb: CallbackQuery):
 # --------------------------- Delete configuration Button Action --------------- #
 @Client.on_callback_query(filters.regex(r'^del_cfg_btn$'))
 async def del_config(client: Bot, cb: CallbackQuery):
-    usr = int(cb.message.chat.id)
+    usr = int(cb.from_user.id)
     if usr in source_chat and destination_chat:
         source_chat.pop(usr)
         destination_chat.pop(usr)
@@ -75,7 +75,7 @@ async def del_config(client: Bot, cb: CallbackQuery):
 # --------------------------- Clone Button Action ----------------------------- #
 @Client.on_callback_query(filters.regex(r'^clone_btn$'))
 async def clone_button(client: Bot, cb: CallbackQuery):
-    usr = int(cb.message.chat.id)
+    usr = int(cb.from_user.id)
     if usr in source_chat and destination_chat:
         await cb.message.delete()
         await clone_medias(client, cb.message)
@@ -93,7 +93,7 @@ async def help_txt(client: Bot, cb: CallbackQuery):
 # --------------------------- Stop Button Action ----------------------------- #
 @Client.on_callback_query(filters.regex(r'^stop_clone$'))
 async def stop_process(client: Bot, cb: CallbackQuery):
-    usr = int(cb.message.chat.id)
+    usr = int(cb.from_user.id)
     await cb.message.delete()
     clone_status.pop(usr)
 
