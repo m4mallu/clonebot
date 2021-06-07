@@ -32,6 +32,9 @@ class Config(object):
     # Generate a user session string
     TG_USER_SESSION = os.environ.get("TG_USER_SESSION", "")
 
+    # Database URI
+    DB_URI = os.environ.get("DATABASE_URL", "")
+
 
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)

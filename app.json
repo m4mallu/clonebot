@@ -12,6 +12,14 @@
         "TG_USER_SESSION": {"description": "String Session from an admin user. Go to: t.ly/GxsB ","required": true},
         "ENV": {"description": "Set this to ANYTHING","value": "ANYTHING"}
   },
+  "addons": [
+    {
+    "plan": "heroku-postgresql",
+      "options": {
+        "version": "12"
+      }
+    }
+  ],
   "buildpacks": [
     {"url": "heroku/python"}
   ],

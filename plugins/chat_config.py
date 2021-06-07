@@ -1,205 +1,204 @@
-# ----------------------------------- https://github.com/m4mallu/clonebot --------------------------------------------#
 import asyncio
 from bot import Bot
+from library.sql import *
 from presets import Presets
-from pyrogram import filters, Client
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
-from init import source_chat, destination_chat, source_message_id, dest_message_id, help_message_id
+from library.chat_support import find_msg_id
+from library.buttons import reply_markup_start, reply_markup_home
+from pyrogram.types import Message
 
 
 # ----------------------------- Start Message command function --------------------------- #
-@Bot.on_message(filters.private & filters.command('start'))
-async def start_bot(client: Bot, message: Message):
-    usr = int(message.chat.id)
-    try:
-        help_message_id.pop(usr)
-    except Exception:
-        pass
+@Bot.on_message(filters.private & filters.command(['start', 'help']))
+async def start(client: Bot, message: Message):
     await message.reply_text(
-        text=Presets.WELCOME_TEXT,
-        parse_mode='html',
-        disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton(text="⏳   SOURCE", callback_data="source_btn"),
-                 InlineKeyboardButton(text="🎯   DESTINATION", callback_data="dest_btn")],
-                [InlineKeyboardButton(text="💡   VIEW CONFIG", callback_data="view_btn"),
-                 InlineKeyboardButton(text="🚫   DEL CONFIG", callback_data="del_cfg_btn")],
-                [InlineKeyboardButton(text="🌀 CLONE 🌀", callback_data="clone_btn")],
-                [InlineKeyboardButton(text="❓   HELP", callback_data="help_btn"),
-                 InlineKeyboardButton(text="❌   CLOSE", callback_data="close_btn")]
-            ]
-        )
+        Presets.START_TEXT.format(message.from_user.first_name),
+        reply_markup=reply_markup_start
     )
 
 
-# -------------------------- Chat Id Input All-In-One function ---------------------------- #
+# --------------------------------------- Main Window ------------------------------------ #
+async def start_options(client: Bot, message: Message):
+    await message.reply_text(
+        Presets.WELCOME_TEXT,
+        parse_mode='html',
+        disable_web_page_preview=True,
+        reply_markup=reply_markup_home
+    )
 
-# This fn code is a little bit complex as its logic. But optimized..
-# When a replay is coming to the bot from ForceReply either from Source button or Destination button,
-# this function will 'try:' to identify the message id which is replied. # All-In-One Input Function.
 
-# When the replay is to wards the source:
-# code will check..
-#     1. The replay value is a perfect chat id or not !
-#     2. The replay value is already in destination chat config (To avoid self spamming).
-#     3. Whether the string user is a member in the source chat id given.
-#     4. If any error in the above 3 states, bot will give the appropriate message nd leaves to Home.
-#
-# For any of the exceptions to the above: (Replay towards destination)
-# code will check..
-#     1. The replay value is a perfect chat id or not !
-#     2. The replay value is already in source chat config (To avoid self spamming).
-#     3. The string user status(As admin) and "Posting Privileges" in destination chat id given.
-#     4. If any error in the above 3 states, bot will give the appropriate message nd leaves to Home.
-#
-# If all states found okay, bot will add both chat ids to the dict, later, can proceed to clone function.
-
+# ------------------------------------ All-n-One Input fn --------------------------------- #
 @Client.on_message(filters.private & filters.text & filters.reply)
-async def chat_reply(client: Bot, message: Message):
-    usr = int(message.from_user.id)
-    user_bot_me = await client.USER.get_me()
+async def force_reply_msg(client: Bot, message: Message):
+    chat_info = message.text
+    id = int(message.from_user.id)
     chat_status = []
-    try:
-        if message.reply_to_message.message_id == source_message_id[usr]:
-            if str(message.text).startswith('-100') and message.text[1:].isdigit():
-                chat_id = int(message.text)
-            elif str(message.text).startswith('@') and bool(str(message.text).isdigit()) == bool(0):
-                chat_id = str(message.text)
-            else:
+    member_status = []
+    user_bot_me = await client.USER.get_me()
+    query = await query_msg(id)
+    a = int(query.s_chat_msg_id)
+    b = int(query.d_chat_msg_id)
+    c = int(query.from_msg_id)
+    d = int(query.to_msg_id)
+    e = int(query.s_chat)
+    f = int(query.d_chat)
+    g = int(query.last_msg_id)
+    if "https://t.me/joinchat" in message.text:
+        chat_info = message.text
+    elif "https://t.me/" in message.text:
+        chat_info = str(message.text).split('/')[-1]
+    elif str(message.text).startswith('-100') and message.text[1:].isdigit():
+        chat_info = int(message.text)
+    elif ("-100" not in str(message.text)) and str(message.text).isdigit():
+        chat_info = int('-100' + str(message.text))
+    else:
+        pass
+    bot_msg = await message.reply_text(Presets.WAIT_MSG)
+    if message.reply_to_message.message_id == a:
+        try:
+            chat_status = await client.USER.get_chat(chat_info)
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+        except Exception:
+            await client.delete_messages(message.chat.id, a)
+            await message.delete()
+            await bot_msg.edit(Presets.INVALID_CHAT_ID)
+            await asyncio.sleep(10)
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+            return
+        chat_id = int(chat_status.id)
+        user_name = chat_status.username
+        dc = chat_status.dc_id
+        dc_id = {dc == 1: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟏]", dc == 2: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟐]", dc == 3: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟑]",
+                 dc == 4: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟒]", dc == 5: "𝐒𝐢𝐧𝐠𝐚𝐩𝐨𝐫𝐞, 𝐒𝐆 [𝐃𝐂 𝟓]"}.get(True)
+        await asyncio.sleep(1)
+        try:
+            if chat_id == f:
+                await client.delete_messages(message.chat.id, a)
+                await message.delete()
+                await bot_msg.edit(Presets.CHAT_DUPLICATED_MSG)
+                await asyncio.sleep(5)
+                await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
                 return
-            bot_msg = await message.reply_text(text=Presets.WAIT_MSG)
+        except Exception:
+            pass
+        await client.delete_messages(message.chat.id, a)
+        await message.delete()
+        await source_cnf_db(id, chat_id)
+        await del_from_to_ids(id)
+        clone_count[id] = id
+        await bot_msg.edit(Presets.SOURCE_CONFIRM.format(chat_status.title,
+                                                         chat_id,
+                                                         chat_status.type,
+                                                         '@' + str(user_name) if bool(user_name) is bool(1) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
+                                                         dc_id if bool(dc_id) is bool(1) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
+                                                         chat_status.members_count
+                                                         )
+                           )
+        await start_options(client, message)
+        await find_msg_id(client, id, chat_id)
+    elif message.reply_to_message.message_id == b:
+        await asyncio.sleep(1)
+        try:
+            chat_status = await client.USER.get_chat(chat_info)
+        except FloodWait as e:
+            await asyncio.sleep(e.x)
+        except Exception:
+            await bot_msg.edit(Presets.USER_ABSENT_MSG)
+            await client.delete_messages(message.chat.id, b)
+            await message.delete()
+            await asyncio.sleep(10)
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+            return
+        chat_id = int(chat_status.id)
+        user_name = chat_status.username
+        dc = chat_status.dc_id
+        dc_id = {dc == 1: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟏]", dc == 2: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟐]", dc == 3: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟑]",
+                 dc == 4: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟒]", dc == 5: "𝐒𝐢𝐧𝐠𝐚𝐩𝐨𝐫𝐞, 𝐒𝐆 [𝐃𝐂 𝟓]"}.get(True)
+        try:
+            if chat_id == e:
+                await client.delete_messages(message.chat.id, b)
+                await message.delete()
+                await bot_msg.edit(Presets.CHAT_DUPLICATED_MSG)
+                await asyncio.sleep(5)
+                await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+                return
+        except Exception:
+            pass
+        member_status = await client.USER.get_chat_member(chat_id, user_bot_me.id)
+        if member_status.can_post_messages == bool(1):
+            await client.delete_messages(message.chat.id, b)
+            await message.delete()
+            await target_cnf_db(id, chat_id)
+            await bot_msg.edit(Presets.DEST_CNF.format(chat_status.title,
+                                                       chat_id,
+                                                       chat_status.type,
+                                                       '@' + str(user_name) if bool(user_name) is bool(1) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
+                                                       dc_id if bool(dc_id) is bool(1) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
+                                                       chat_status.members_count
+                                                       )
+                               )
+            await asyncio.sleep(2)
+            await start_options(client, message)
+        else:
+            await client.delete_messages(message.chat.id, b)
+            await message.delete()
+            await bot_msg.edit(Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING)
+            await asyncio.sleep(10)
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+    elif message.reply_to_message.message_id == c:
+        msg = int()
+        if str(message.text).isdigit():
             await asyncio.sleep(1)
             try:
-                chat_status = await client.USER.get_chat(chat_id)
-            except FloodWait as e:
-                await asyncio.sleep(e.x)
-            except Exception:
-                await client.delete_messages(message.chat.id, source_message_id[usr])
-                await bot_msg.edit(Presets.INVALID_CHAT_ID)
-                await message.delete()
-                await asyncio.sleep(3)
-                await bot_msg.delete()
-                await start_bot(client, message)
-                return
-            try:
-                if destination_chat[usr] == message.text:
+                msg = int(query.last_msg_id)
+                if (bool(msg) != bool(0)) and (int(message.text) > msg):
+                    await client.delete_messages(message.chat.id, c)
                     await message.delete()
-                    await client.delete_messages(message.chat.id, source_message_id[usr])
-                    await bot_msg.edit(Presets.CHAT_DUPLICATED_MSG)
+                    await bot_msg.edit(Presets.OVER_FLOW)
                     await asyncio.sleep(5)
-                    await bot_msg.delete()
-                    await start_bot(client, message)
+                    await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
                     return
             except Exception:
                 pass
-            if bool(chat_status.username) == bool(0):
-                try:
-                    await client.USER.get_chat_member(chat_id=int(message.text), user_id=int(user_bot_me.id))
-                except Exception:
-                    await message.delete()
-                    await bot_msg.edit(Presets.IN_CORRECT_PERMISSIONS_MESSAGE_SOURCE)
-                    await client.delete_messages(message.chat.id, source_message_id[usr])
-                    source_message_id.pop(usr)
-                    await asyncio.sleep(5)
-                    await bot_msg.delete()
-                    await start_bot(client, message)
-                    return
-            await client.delete_messages(message.chat.id, source_message_id[usr])
-            source_chat[usr] = message.text
+            await from_msg_id_cnf_db(id, message.text)
+            await client.delete_messages(message.chat.id, c)
             await message.delete()
-            source_message_id.pop(usr)
-            await bot_msg.edit(Presets.SOURCE_CONFIRM.format(source_chat[usr]))
-            await asyncio.sleep(2)
-            await start_bot(client, message)
-            return
-        else:
-            await client.delete_messages(message.chat.id, source_message_id[usr])
-            warn = await message.reply_text(Presets.INVALID_CHAT_ID)
-            await message.delete()
-            source_message_id.pop(usr)
+            await bot_msg.edit(Presets.FROM_MSG_ID_CNF.format(message.text))
             await asyncio.sleep(3)
-            await warn.delete()
-            await start_bot(client, message)
-            return
-    except Exception:
-        if message.reply_to_message.message_id == dest_message_id[usr]:
-            if str(message.text).startswith('-100') and message.text[1:].isdigit():
-                bot_msg = await message.reply_text(text=Presets.WAIT_MSG)
-                await asyncio.sleep(1)
-                try:
-                    if source_chat[usr] == message.text:
-                        await message.delete()
-                        await client.delete_messages(message.chat.id, dest_message_id[usr])
-                        await bot_msg.edit(Presets.CHAT_DUPLICATED_MSG)
-                        await asyncio.sleep(5)
-                        await bot_msg.delete()
-                        await start_bot(client, message)
-                        return
-                except Exception:
-                    pass
-                try:
-                    member_status = await client.USER.get_chat_member(
-                        chat_id=int(message.text),
-                        user_id=int(user_bot_me.id)
-                    )
-                except Exception:
-                    await client.delete_messages(message.chat.id, dest_message_id[usr])
-                    await bot_msg.edit(text=Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_ADMIN)
-                    await message.delete()
-                    dest_message_id.pop(usr)
-                    await asyncio.sleep(5)
-                    await bot_msg.delete()
-                    await start_bot(client, message)
-                    return
-                if member_status.can_post_messages == bool(1):
-                    destination_chat[usr] = message.text
-                    await client.delete_messages(message.chat.id, dest_message_id[usr])
-                    await bot_msg.edit(Presets.DESTINATION_CONFIRM.format(destination_chat[usr]))
-                    await message.delete()
-                    dest_message_id.pop(usr)
-                    await asyncio.sleep(2)
-                    await start_bot(client, message)
-                    return
-                else:
-                    await client.delete_messages(message.chat.id, dest_message_id[usr])
-                    await bot_msg.edit(text=Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING)
-                    await message.delete()
-                    dest_message_id.pop(usr)
-                    await asyncio.sleep(5)
-                    await bot_msg.delete()
-                    await start_bot(client, message)
-                    return
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
         else:
-            await client.delete_messages(message.chat.id, dest_message_id[usr])
-            warn = await message.reply_text(Presets.INVALID_CHAT_ID)
+            await client.delete_messages(message.chat.id, c)
             await message.delete()
-            dest_message_id.pop(usr)
+            await bot_msg.edit_text(Presets.INVALID_MSG_ID, reply_markup=reply_markup_home)
             await asyncio.sleep(3)
-            await warn.delete()
-            await start_bot(client, message)
-            return
-
-
-# ----------------------------- Help Function (How to use Bot) --------------------------- #
-async def help_me(client: Bot, message: Message):
-    usr = int(message.chat.id)
-    msg_help = await message.reply_text(
-        text=Presets.HELP_TEXT.format(message.from_user.first_name),
-        parse_mode='html',
-        disable_web_page_preview=True,
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton(text="🏠 HOME 🏠️", callback_data="home_btn")]
-            ]
-        )
-    )
-    help_message_id[usr] = msg_help.message_id
-    await asyncio.sleep(30)
-    try:
-        if help_message_id[usr] == msg_help.message_id:
-            await msg_help.delete()
-            await start_bot(client, message)
-    except Exception:
-        pass
+            await bot_msg.delete()
+    elif message.reply_to_message.message_id == d:
+        if str(message.text).isdigit():
+            if (g != 0) and int(message.text) > g:
+                await client.delete_messages(message.chat.id, d)
+                await message.delete()
+                await bot_msg.edit(Presets.OVER_FLOW)
+                await asyncio.sleep(5)
+                await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+                return
+            await asyncio.sleep(1)
+            await to_msg_id_cnf_db(id, message.text)
+            await client.delete_messages(message.chat.id, d)
+            await message.delete()
+            await bot_msg.edit(Presets.END_MSG_ID_CNF.format(message.text))
+            await asyncio.sleep(3)
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+        else:
+            await client.delete_messages(message.chat.id, d)
+            await message.delete()
+            await bot_msg.edit_text(Presets.INVALID_MSG_ID, reply_markup=reply_markup_home)
+            await asyncio.sleep(3)
+            await bot_msg.delete()
+    else:
+        await client.delete_messages(message.chat.id, message.reply_to_message.message_id)
+        await message.delete()
+        await bot_msg.edit_text(Presets.INVALID_REPLY_MSG, reply_markup=reply_markup_home)
+        await asyncio.sleep(5)
+        await bot_msg.delete()
