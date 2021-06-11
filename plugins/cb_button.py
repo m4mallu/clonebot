@@ -135,50 +135,50 @@ async def stop_process(client: Bot, cb: CallbackQuery):
 async def list_doc(client: Bot, cb: CallbackQuery):
     if "document" in file_types:
         file_types.remove("document")
-        await cb.answer(Presets.RM_DOC, True)
+        await cb.answer(Presets.RM_DOC)
     else:
         file_types.append("document")
-        await cb.answer(Presets.ADD_DOC, True)
+        await cb.answer(Presets.ADD_DOC)
 
 
 @Client.on_callback_query(filters.regex(r'^video_btn$'))
 async def list_video(client: Bot, cb: CallbackQuery):
     if "video" in file_types:
         file_types.remove("video")
-        await cb.answer(Presets.RM_VID, True)
+        await cb.answer(Presets.RM_VID)
     else:
         file_types.append("video")
-        await cb.answer(Presets.ADD_VID, True)
+        await cb.answer(Presets.ADD_VID)
 
 
 @Client.on_callback_query(filters.regex(r'^audio_btn$'))
 async def list_audio(client: Bot, cb: CallbackQuery):
     if "audio" in file_types:
         file_types.remove("audio")
-        await cb.answer(Presets.RM_AUD, True)
+        await cb.answer(Presets.RM_AUD)
     else:
         file_types.append("audio")
-        await cb.answer(Presets.ADD_AUD, True)
+        await cb.answer(Presets.ADD_AUD)
 
 
 @Client.on_callback_query(filters.regex(r'^photo_btn$'))
 async def list_photo(client: Bot, cb: CallbackQuery):
     if "photo" in file_types:
         file_types.remove("photo")
-        await cb.answer(Presets.RM_PIC, True)
+        await cb.answer(Presets.RM_PIC)
     else:
         file_types.append("photo")
-        await cb.answer(Presets.ADD_PIC, True)
+        await cb.answer(Presets.ADD_PIC,)
 
 
 @Client.on_callback_query(filters.regex(r'^voice_btn$'))
 async def list_voice(client: Bot, cb: CallbackQuery):
     if "voice" in file_types:
         file_types.remove("voice")
-        await cb.answer(Presets.RM_VOI, True)
+        await cb.answer(Presets.RM_VOI)
     else:
         file_types.append("voice")
-        await cb.answer(Presets.ADD_VOI, True)
+        await cb.answer(Presets.ADD_VOI)
 
 
 # Call back function for clone: Random button clicks avoided

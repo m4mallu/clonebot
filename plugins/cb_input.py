@@ -46,7 +46,7 @@ async def from_msg_config(client: Bot, cb: CallbackQuery):
     if query == bool(0):
         await cb.answer(Presets.CNF_SOURCE_FIRST, True)
         return
-    await cb.answer(Presets.NOT_REQUIRED, True)
+    await cb.answer(Presets.NOT_REQUIRED)
     await cb.message.delete()
     msg = await client.send_message(cb.message.chat.id,
                                     Presets.ASK_START_MSG_ID,
@@ -67,7 +67,7 @@ async def to_msg_config(client: Bot, cb: CallbackQuery):
     if query == bool(0):
         await cb.answer(Presets.CNF_SOURCE_FIRST, True)
         return
-    await cb.answer(Presets.NOT_REQUIRED, True)
+    await cb.answer(Presets.NOT_REQUIRED)
     await cb.message.delete()
     msg = await client.send_message(cb.message.chat.id,
                                     Presets.ASK_END_MSG_ID,

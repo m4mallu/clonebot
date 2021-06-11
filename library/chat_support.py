@@ -8,7 +8,7 @@ from pyrogram.errors import FloodWait
 async def find_msg_id(client, id, chat_id):
     id_last_msg = int()
     try:
-        async for user_message in client.USER.iter_history(chat_id, limit=1):
+        async for user_message in client.USER.iter_history(chat_id):
             messages = await client.USER.get_messages(chat_id, user_message.message_id, replies=0)
             for file_type in file_types:
                 media = getattr(messages, file_type, None)
