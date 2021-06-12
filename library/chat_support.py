@@ -38,3 +38,11 @@ async def calc_progress(pct):
     progress = int()
     progress = (int(pct)//10 * "⬛️ " + (10-int(pct)//10) * "◻️ ")
     return progress
+
+
+# Function to find DC Id:
+async def find_dc(chat_status):
+    dc = chat_status.dc_id
+    dc_id = {dc == 1: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟏]", dc == 2: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟐]", dc == 3: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟑]",
+             dc == 4: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟒]", dc == 5: "𝐒𝐢𝐧𝐠𝐚𝐩𝐨𝐫𝐞, 𝐒𝐆 [𝐃𝐂 𝟓]"}.get(True)
+    return dc_id

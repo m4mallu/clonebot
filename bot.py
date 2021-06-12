@@ -1,8 +1,6 @@
 #----------------------------------- https://github.com/m4mallu/clonebot --------------------------------------------#
 import os
 import sys
-import pytz
-import datetime
 from user import User
 from pyrogram import Client
 from presets import Presets as Msg
@@ -14,10 +12,6 @@ if bool(os.environ.get("ENV", False)):
 else:
     from config import Config
     from config import LOGGER
-
-
-time_now = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M:%S %p')
-start_date = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).date()
 
 
 class Bot(Client):
@@ -47,19 +41,11 @@ class Bot(Client):
         )
         self.USER, self.USER_ID = await User().start()
         try:
-            await self.USER.send_message(usr_bot_me.username,
-                                         Msg.SESSION_START_INFO.format(start_date, time_now)
-                                         )
+            await self.USER.send_message(usr_bot_me.username, "%session_start%")
         except Exception:
             print(Msg.BOT_BLOCKED_MSG)
             sys.exit()
 
     async def stop(self, *args):
-        usr_bot_me = await self.get_me()
-        await self.USER.send_message(usr_bot_me.username,
-                                     Msg.SESSION_STOP_INFO.format(usr_bot_me.id, start_date, time_now),
-                                     parse_mode='html',
-                                     disable_web_page_preview=True
-                                     )
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped. Bye.")
