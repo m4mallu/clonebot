@@ -35,6 +35,9 @@ class Config(object):
     # Database URI
     DB_URI = os.environ.get("DATABASE_URL", "")
 
+    # Comma separated User Ids
+    ALLOWED = os.environ.get("ALLOWED_USERS","0")
+
 
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)

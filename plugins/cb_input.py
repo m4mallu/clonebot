@@ -1,12 +1,12 @@
 import asyncio
-from bot import Bot
+from bot import Bot, allowed
 from library.sql import *
 from presets import Presets
 from pyrogram import Client, filters
 from pyrogram.types import CallbackQuery, ForceReply
 
 
-@Client.on_callback_query(filters.regex(r'^source_btn$'))
+@Client.on_callback_query(filters.regex(r'^source_btn$') & allowed)
 async def source_chat_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     await cb.answer(Presets.INFO_CHAT_TYPES, True)
@@ -22,7 +22,7 @@ async def source_chat_config(client: Bot, cb: CallbackQuery):
     await msg.delete()
 
 
-@Client.on_callback_query(filters.regex(r'^target_btn$'))
+@Client.on_callback_query(filters.regex(r'^target_btn$') & allowed)
 async def dest_chat_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     await cb.answer(Presets.INFO_CHAT_TYPES, True)
@@ -38,7 +38,7 @@ async def dest_chat_config(client: Bot, cb: CallbackQuery):
     await msg.delete()
 
 
-@Client.on_callback_query(filters.regex(r'^from_btn$'))
+@Client.on_callback_query(filters.regex(r'^from_btn$') & allowed)
 async def from_msg_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     ping = await query_msg(id)
@@ -59,7 +59,7 @@ async def from_msg_config(client: Bot, cb: CallbackQuery):
     await msg.delete()
 
 
-@Client.on_callback_query(filters.regex(r'^up_to_btn$'))
+@Client.on_callback_query(filters.regex(r'^up_to_btn$') & allowed)
 async def to_msg_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     ping = await query_msg(id)

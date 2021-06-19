@@ -1,5 +1,5 @@
 import sys
-from bot import Bot
+from bot import Bot, allowed
 from library.sql import *
 from presets import Presets
 from pyrogram import Client, filters
@@ -9,7 +9,7 @@ from library.buttons import reply_markup_types_button
 from pyrogram.types import CallbackQuery
 
 
-@Client.on_callback_query(filters.regex(r'^start_btn$'))
+@Client.on_callback_query(filters.regex(r'^start_btn$') & allowed)
 async def start_settings(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     await add_user(id)
@@ -17,7 +17,7 @@ async def start_settings(client: Bot, cb: CallbackQuery):
     await cb.message.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home, parse_mode='md')
 
 
-@Client.on_callback_query(filters.regex(r'^view_btn$'))
+@Client.on_callback_query(filters.regex(r'^view_btn$') & allowed)
 async def view_chat_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     query = await query_msg(id)
@@ -44,7 +44,7 @@ async def view_chat_config(client: Bot, cb: CallbackQuery):
     ), show_alert=True)
 
 
-@Client.on_callback_query(filters.regex(r'^delay_btn$'))
+@Client.on_callback_query(filters.regex(r'^delay_btn$') & allowed)
 async def delayed_clone(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     query = await query_msg(id)
@@ -57,7 +57,7 @@ async def delayed_clone(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.DELAY_ON, True)
 
 
-@Client.on_callback_query(filters.regex(r'^caption_btn$'))
+@Client.on_callback_query(filters.regex(r'^caption_btn$') & allowed)
 async def file_caption(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     query = await query_msg(id)
@@ -70,7 +70,7 @@ async def file_caption(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.CAPTION_ON, True)
 
 
-@Client.on_callback_query(filters.regex(r'^f_caption_btn$'))
+@Client.on_callback_query(filters.regex(r'^f_caption_btn$') & allowed)
 async def file_name_caption(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     query = await query_msg(id)
@@ -83,13 +83,13 @@ async def file_name_caption(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.FN_AS_CAPT_ON, True)
 
 
-@Client.on_callback_query(filters.regex(r'^types_btn$'))
+@Client.on_callback_query(filters.regex(r'^types_btn$') & allowed)
 async def set_types(client: Bot, cb: CallbackQuery):
     await cb.answer()
     await cb.message.edit_text(Presets.SELECT_TYPE, reply_markup=reply_markup_types_button)
 
 
-@Client.on_callback_query(filters.regex(r'^view_types$'))
+@Client.on_callback_query(filters.regex(r'^view_types$') & allowed)
 async def view_file_types(client: Bot, cb: CallbackQuery):
     await cb.answer(Presets.SELECTED_TYPE.format("✅" if "document" in file_types else "❎",
                                                  "✅" if "audio" in file_types else "❎",
@@ -101,19 +101,19 @@ async def view_file_types(client: Bot, cb: CallbackQuery):
                     )
 
 
-@Client.on_callback_query(filters.regex(r'^terminate_btn$'))
+@Client.on_callback_query(filters.regex(r'^terminate_btn$') & allowed)
 async def terminate_bot(client: Bot, cb: CallbackQuery):
     await cb.answer(Presets.TERMINATED_MSG, True)
     await cb.message.delete()
     sys.exit()
 
 
-@Client.on_callback_query(filters.regex(r'^close_btn$'))
+@Client.on_callback_query(filters.regex(r'^close_btn$') & allowed)
 async def close(client: Bot, cb: CallbackQuery):
     await cb.message.delete()
 
 
-@Client.on_callback_query(filters.regex(r'^rst_btn$'))
+@Client.on_callback_query(filters.regex(r'^rst_btn$') & allowed)
 async def reset_settings(client: Bot, cb: CallbackQuery):
     file_types.clear()
     file_types.extend(Presets.FILE_TYPES)
@@ -121,7 +121,7 @@ async def reset_settings(client: Bot, cb: CallbackQuery):
     await cb.answer(Presets.RST_MSG, True)
 
 
-@Client.on_callback_query(filters.regex(r'^stop_clone$'))
+@Client.on_callback_query(filters.regex(r'^stop_clone$') & allowed)
 async def stop_process(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     try:
@@ -131,7 +131,7 @@ async def stop_process(client: Bot, cb: CallbackQuery):
     await cb.message.delete()
 
 
-@Client.on_callback_query(filters.regex(r'^docs_btn$'))
+@Client.on_callback_query(filters.regex(r'^docs_btn$') & allowed)
 async def list_doc(client: Bot, cb: CallbackQuery):
     if "document" in file_types:
         file_types.remove("document")
@@ -141,7 +141,7 @@ async def list_doc(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.ADD_DOC)
 
 
-@Client.on_callback_query(filters.regex(r'^video_btn$'))
+@Client.on_callback_query(filters.regex(r'^video_btn$') & allowed)
 async def list_video(client: Bot, cb: CallbackQuery):
     if "video" in file_types:
         file_types.remove("video")
@@ -151,7 +151,7 @@ async def list_video(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.ADD_VID)
 
 
-@Client.on_callback_query(filters.regex(r'^audio_btn$'))
+@Client.on_callback_query(filters.regex(r'^audio_btn$') & allowed)
 async def list_audio(client: Bot, cb: CallbackQuery):
     if "audio" in file_types:
         file_types.remove("audio")
@@ -161,7 +161,7 @@ async def list_audio(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.ADD_AUD)
 
 
-@Client.on_callback_query(filters.regex(r'^photo_btn$'))
+@Client.on_callback_query(filters.regex(r'^photo_btn$') & allowed)
 async def list_photo(client: Bot, cb: CallbackQuery):
     if "photo" in file_types:
         file_types.remove("photo")
@@ -171,7 +171,7 @@ async def list_photo(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.ADD_PIC,)
 
 
-@Client.on_callback_query(filters.regex(r'^voice_btn$'))
+@Client.on_callback_query(filters.regex(r'^voice_btn$') & allowed)
 async def list_voice(client: Bot, cb: CallbackQuery):
     if "voice" in file_types:
         file_types.remove("voice")
@@ -182,7 +182,7 @@ async def list_voice(client: Bot, cb: CallbackQuery):
 
 
 # Call back function for clone: Random button clicks avoided
-@Client.on_callback_query(filters.regex(r'^clone_btn$'))
+@Client.on_callback_query(filters.regex(r'^clone_btn$') & allowed)
 async def clone(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     query = await query_msg(id)

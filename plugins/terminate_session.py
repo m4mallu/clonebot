@@ -1,6 +1,6 @@
 import pytz
 import datetime
-from bot import Bot
+from bot import Bot, allowed
 from presets import Presets
 from pyrogram.types import Message
 from pyrogram import Client, filters
@@ -11,7 +11,7 @@ time_now = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M:
 start_date = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).date()
 
 
-@Client.on_message(filters.private & filters.text)
+@Client.on_message(filters.private & filters.text & allowed)
 async def text_update(client: Bot, message: Message):
     session = await client.USER.get_me()
     if (message.from_user.id == int(session.id)) and (message.text == "%session_start%"):

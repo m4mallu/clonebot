@@ -2,7 +2,7 @@
 import os
 import sys
 from user import User
-from pyrogram import Client
+from pyrogram import Client, filters
 from presets import Presets as Msg
 
 
@@ -12,6 +12,9 @@ if bool(os.environ.get("ENV", False)):
 else:
     from config import Config
     from config import LOGGER
+
+# filter for allowed users
+allowed = filters.user([int(i) for i in Config.ALLOWED.split(",")])
 
 
 class Bot(Client):

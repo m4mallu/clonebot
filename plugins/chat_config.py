@@ -1,5 +1,5 @@
 import asyncio
-from bot import Bot
+from bot import Bot, allowed
 from library.sql import *
 from presets import Presets
 from pyrogram import Client, filters
@@ -29,7 +29,7 @@ async def start_options(client: Bot, message: Message):
 
 
 # ------------------------------------ All-n-One Input fn --------------------------------- #
-@Client.on_message(filters.private & filters.text & filters.reply)
+@Client.on_message(filters.private & filters.text & filters.reply & allowed)
 async def force_reply_msg(client: Bot, message: Message):
     chat_info = message.text
     id = int(message.from_user.id)
