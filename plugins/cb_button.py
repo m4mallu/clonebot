@@ -9,12 +9,24 @@ from library.buttons import reply_markup_types_button
 from pyrogram.types import CallbackQuery
 
 
+if bool(os.environ.get("ENV", False)):
+    from sample_config import Config
+else:
+    from config import Config
+
+
 @Client.on_callback_query(filters.regex(r'^start_btn$'))
 async def start_settings(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
+    if id not in Config.AUTH_USERS:
+        await cb.answer(Presets.NOT_AUTH_TEXT, show_alert=True)
+        return
     await add_user(id)
     await cb.answer()
-    await cb.message.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home, parse_mode='md')
+    await cb.message.edit_text(Presets.WELCOME_TEXT,
+                               reply_markup=reply_markup_home,
+                               parse_mode='md'
+                               )
 
 
 @Client.on_callback_query(filters.regex(r'^view_btn$'))
