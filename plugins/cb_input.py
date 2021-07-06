@@ -43,7 +43,7 @@ async def from_msg_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     ping = await query_msg(id)
     query = int(ping.s_chat)
-    if query == bool(0):
+    if not query:
         await cb.answer(Presets.CNF_SOURCE_FIRST, True)
         return
     await cb.answer(Presets.NOT_REQUIRED)
@@ -64,7 +64,7 @@ async def to_msg_config(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     ping = await query_msg(id)
     query = int(ping.s_chat)
-    if query == bool(0):
+    if not query:
         await cb.answer(Presets.CNF_SOURCE_FIRST, True)
         return
     await cb.answer(Presets.NOT_REQUIRED)

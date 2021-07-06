@@ -39,7 +39,7 @@ async def clone_medias(client: Bot, message: Message):
     default_caption = bool(query.caption)
     fn_caption = bool(query.file_caption)
     #
-    if bool(clone_delay) == bool(1):
+    if bool(clone_delay):
         delay = 1
     else:
         delay = 0.25
@@ -51,11 +51,11 @@ async def clone_medias(client: Bot, message: Message):
     else:
         pass
     #
-    if bool(start_id) == bool(0):
+    if not bool(start_id):
         sp = 0
     else:
         sp = start_id
-    if bool(end_id) == bool(0):
+    if not bool(end_id):
         ep = end_msg_id
     else:
         ep = end_id
@@ -64,7 +64,7 @@ async def clone_medias(client: Bot, message: Message):
     await asyncio.sleep(1)
     msg1 = await message.reply_text(Presets.WAIT_MSG, reply_markup=reply_markup_stop)
     async for user_message in client.USER.iter_history(chat_id=source_chat, reverse=True,
-                                                       offset_id=None if bool(start_id) == bool(0) else start_id):
+                                                       offset_id=None if not bool(start_id) else start_id):
         messages = await client.USER.get_messages(source_chat, user_message.message_id, replies=0)
         message_id = messages.message_id
         if id not in cancel_status:
@@ -74,7 +74,7 @@ async def clone_medias(client: Bot, message: Message):
             await reset_all(id)
             file_types.clear()
             file_types.extend(Presets.FILE_TYPES)
-            if int(total_copied) == 0:
+            if not int(total_copied):
                 await msg.delete()
             return
         for file_type in file_types:
@@ -102,12 +102,12 @@ async def clone_medias(client: Bot, message: Message):
                         file_name = messages.caption
                     else:
                         pass
-                    if bool(fn_caption) == bool(1):
+                    if bool(fn_caption):
                         try:
                             caption = str(file_name).rsplit('.', 1)[0]
                         except Exception:
                             file_name = None
-                    elif bool(default_caption) == bool(1):
+                    elif bool(default_caption):
                         caption = messages.caption
                     else:
                         caption = ""
@@ -128,12 +128,12 @@ async def clone_medias(client: Bot, message: Message):
                                 a if len(a) > 0 else 11*'➖',
                                 b if len(b) > 0 else 13*'➖',
                                 c if len(c) > 0 else 13*'➖',
-                                "0" if bool(start_id) == bool(0) else start_id,
+                                "0" if not bool(start_id) else start_id,
                                 int(messages.message_id),
-                                end_msg_id if bool(end_id) == bool(0) else end_id,
-                                "✅" if bool(clone_delay) == bool(1) else "❎",
-                                "✅" if bool(default_caption) == bool(1) else "❎",
-                                "✅" if bool(fn_caption) == bool(1) else "❎",
+                                end_msg_id if not bool(end_id) else end_id,
+                                "✅" if bool(clone_delay) else "❎",
+                                "✅" if bool(default_caption) else "❎",
+                                "✅" if bool(fn_caption) else "❎",
                                 int(total_copied),
                                 trunc(pct) if pct <= 100 else "- ",
                                 doc_files,
@@ -157,7 +157,7 @@ async def clone_medias(client: Bot, message: Message):
                         await client.USER.copy_message(
                             chat_id=target_chat,
                             from_chat_id=source_chat,
-                            caption=caption if bool(caption) == bool(1) else "",
+                            caption=caption if bool(caption) else "",
                             message_id=messages.message_id,
                             disable_notification=True
                         )
@@ -176,7 +176,7 @@ async def clone_medias(client: Bot, message: Message):
                     except Exception:
                         pass
                     await asyncio.sleep(delay)
-                    if (end_id != bool(0)) and (int(messages.message_id) >= end_id):
+                    if end_id and (int(messages.message_id) >= end_id):
                         await reset_all(id)
                         file_types.clear()
                         file_types.extend(Presets.FILE_TYPES)

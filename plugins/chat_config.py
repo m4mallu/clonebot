@@ -89,8 +89,8 @@ async def force_reply_msg(client: Bot, message: Message):
         await bot_msg.edit(Presets.SOURCE_CONFIRM.format(chat_status.title,
                                                          chat_id,
                                                          chat_status.type,
-                                                         '@' + str(user_name) if bool(user_name) is bool(1) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
-                                                         dc_id if bool(dc_id) is bool(1) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
+                                                         '@' + str(user_name) if bool(user_name) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
+                                                         dc_id if bool(dc_id) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
                                                          chat_status.members_count
                                                          )
                            )
@@ -123,15 +123,15 @@ async def force_reply_msg(client: Bot, message: Message):
         except Exception:
             pass
         member_status = await client.USER.get_chat_member(chat_id, user_bot_me.id)
-        if member_status.can_post_messages == bool(1):
+        if member_status.can_post_messages:
             await client.delete_messages(message.chat.id, b)
             await message.delete()
             await target_cnf_db(id, chat_id)
             await bot_msg.edit(Presets.DEST_CNF.format(chat_status.title,
                                                        chat_id,
                                                        chat_status.type,
-                                                       '@' + str(user_name) if bool(user_name) is bool(1) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
-                                                       dc_id if bool(dc_id) is bool(1) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
+                                                       '@' + str(user_name) if bool(user_name) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
+                                                       dc_id if bool(dc_id) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
                                                        chat_status.members_count
                                                        )
                                )
@@ -149,7 +149,7 @@ async def force_reply_msg(client: Bot, message: Message):
             await asyncio.sleep(1)
             try:
                 msg = int(query.last_msg_id)
-                if (bool(msg) != bool(0)) and (int(message.text) > msg):
+                if bool(msg) and (int(message.text) > msg):
                     await client.delete_messages(message.chat.id, c)
                     await message.delete()
                     await bot_msg.edit(Presets.OVER_FLOW)

@@ -41,13 +41,13 @@ async def view_chat_config(client: Bot, cb: CallbackQuery):
     f = bool(query.caption)
     g = bool(query.file_caption)
     await cb.answer(text=Presets.VIEW_CONF.format(
-        a if bool(query.s_chat) is bool(1) else "❎",
-        b if bool(query.d_chat) is bool(1) else "❎",
-        c if bool(query.from_id) is bool(1) else "❎",
-        d if bool(query.to_id) is bool(1) else "❎",
-        "✅" if e is bool(1) else "❎",
-        "✅" if f is bool(1) else "❎",
-        "✅" if g is bool(1) else "❎",
+        a if bool(query.s_chat) else "❎",
+        b if bool(query.d_chat) else "❎",
+        c if bool(query.from_id) else "❎",
+        d if bool(query.to_id) else "❎",
+        "✅" if e is True else "❎",
+        "✅" if f is True else "❎",
+        "✅" if g is True else "❎",
         "✅" if "document" in file_types else "❎",
         "✅" if "video" in file_types else "❎",
         "✅" if "audio" in file_types else "❎",
