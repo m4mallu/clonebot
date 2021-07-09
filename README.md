@@ -22,7 +22,9 @@
 </p>
 
 <br>
+
 <a href="https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot-ui.git"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"></a>
+
 <br>
 
 <p align="center">
