@@ -23,7 +23,7 @@
 
 <br>
 
-<a href="https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot-ui.git"><img src="https://sdeehub.github.io/cpe/assets/images/authors/reallife/2018-04-07/Deploy-to-heroku-logo.png" alt="Deploy to Heroku"></a>
+<center><a href="https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot-ui.git"><img src="https://sdeehub.github.io/cpe/assets/images/authors/reallife/2018-04-07/Deploy-to-heroku-logo.png" alt="Deploy to Heroku"></a></center>
 
 <br>
 
