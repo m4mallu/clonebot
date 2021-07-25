@@ -76,6 +76,7 @@ async def index_target_chat(client: Bot, message: Message):
                         await asyncio.sleep(e.x)
                     except Exception:
                         pass
+                    await asyncio.sleep(0.5)
     #
     if msg_id_index:
         await msg2.delete()
@@ -120,6 +121,7 @@ async def purge_media(client: Bot, message: Message):
             await asyncio.sleep(e.x)
         except Exception:
             pass
+        await asyncio.sleep(0.5)
     #
     await msg2.delete()
     await clone_medias(client, message)
