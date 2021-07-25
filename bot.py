@@ -24,6 +24,7 @@ class Bot(Client):
             api_hash=Config.API_HASH,
             api_id=Config.APP_ID,
             bot_token=Config.TG_BOT_TOKEN,
+            sleep_threshold=30,
             workers=8,
             plugins={
                 "root": "plugins"
