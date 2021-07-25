@@ -55,8 +55,32 @@ terminate_btn = [
      InlineKeyboardButton("🏠 Home", "start_btn")]
 ]
 
+indexing_skip_button = [
+        [
+            InlineKeyboardButton("🕹 Skip", "index_skip_btn")
+        ]
+    ]
+
+purging_skip_button = [
+        [
+            InlineKeyboardButton("🕹 Skip", "purge_skip_btn")
+        ]
+    ]
+
+purge_button = [
+    [
+        InlineKeyboardButton("Nop", "purge_no_btn"),
+        InlineKeyboardButton("Purge it 👍", "purge_yes_btn")
+    ]
+]
 
 # markups used
+
+reply_markup_purge = InlineKeyboardMarkup(purge_button)
+
+reply_markup_skip_index = InlineKeyboardMarkup(indexing_skip_button)
+
+reply_markup_skip_purge = InlineKeyboardMarkup(purging_skip_button)
 
 reply_markup_stop = InlineKeyboardMarkup(stop_button)
 

@@ -118,6 +118,7 @@ intermediabot.session
 
 # to store the downloaded files
 /DOWNLOADS
+/cfg
 
 #Session Files
 *.session

@@ -1,12 +1,17 @@
 import os
 import threading
 from sqlalchemy import create_engine
+from sqlalchemy import Column, Boolean, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import Column, Boolean, Numeric
 
-cancel_status = {}
-clone_count = {}
+
+clone_cancel_key = {}       # Clone cancel status key
+clone_btn_count = {}        # Clone button single click actuator key
+index_skip_key = {}         # Skip indexing function key
+purge_skip_key = {}         # Purge function key
+
+master_index = []               # Unique Id index of cloning medias (including target chat)
 file_types = ["document", "video", "audio", "voice", "photo"]
 
 if bool(os.environ.get("ENV", False)):

@@ -1,12 +1,15 @@
+#----------------------------------- https://github.com/m4mallu/clonebot-ui ------------------------------------------#
 import sys
 from bot import Bot
 from library.sql import *
 from presets import Presets
 from pyrogram import Client, filters
 from plugins.clone import clone_medias
+from pyrogram.types import CallbackQuery
+from library.chat_support import del_user_cfg
 from plugins.chat_config import reply_markup_home
 from library.buttons import reply_markup_types_button
-from pyrogram.types import CallbackQuery
+from plugins.file_index import index_target_chat, purge_media
 
 
 if bool(os.environ.get("ENV", False)):
@@ -128,16 +131,18 @@ async def close(client: Bot, cb: CallbackQuery):
 @Client.on_callback_query(filters.regex(r'^rst_btn$'))
 async def reset_settings(client: Bot, cb: CallbackQuery):
     file_types.clear()
+    id = int(cb.from_user.id)
     file_types.extend(Presets.FILE_TYPES)
     await reset_all(int(cb.from_user.id))
     await cb.answer(Presets.RST_MSG, True)
+    await del_user_cfg(id)
 
 
 @Client.on_callback_query(filters.regex(r'^stop_clone$'))
 async def stop_process(client: Bot, cb: CallbackQuery):
     id = int(cb.from_user.id)
     try:
-        cancel_status.pop(id)
+        clone_cancel_key.pop(id)
     except Exception:
         pass
     await cb.message.delete()
@@ -204,10 +209,37 @@ async def clone(client: Bot, cb: CallbackQuery):
         await cb.answer(Presets.NOT_CONFIGURED, True)
         return
     else:
-        if id in clone_count:
-            await cb.message.delete()
+        if id in clone_btn_count:
             try:
-                clone_count.pop(id)
-                await clone_medias(client, cb.message)
+                clone_btn_count.pop(id)
+                await index_target_chat(client, cb.message)
             except Exception:
                 pass
+
+
+@Client.on_callback_query(filters.regex(r'^index_skip_btn$'))
+async def skip_indexing(client: Bot, cb: CallbackQuery):
+    id = int(cb.from_user.id)
+    try:
+        index_skip_key.pop(id)
+    except Exception:
+        pass
+
+
+@Client.on_callback_query(filters.regex(r'^purge_skip_btn$'))
+async def skip_purging(client: Bot, cb: CallbackQuery):
+    id = int(cb.from_user.id)
+    try:
+        purge_skip_key.pop(id)
+    except Exception:
+        pass
+
+
+@Client.on_callback_query(filters.regex(r'^purge_no_btn$'))
+async def purge_no(client: Bot, cb: CallbackQuery):
+    await clone_medias(client, cb.message)
+
+
+@Client.on_callback_query(filters.regex(r'^purge_yes_btn$'))
+async def purge_yes(client: Bot, cb: CallbackQuery):
+    await purge_media(client, cb.message)
