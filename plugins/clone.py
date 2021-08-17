@@ -39,7 +39,7 @@ async def clone_medias(client: Bot, message: Message):
     fn_caption = bool(query.file_caption)
     #
     if bool(clone_delay):
-        delay = 2
+        delay = 10
     else:
         delay = 0.25
     #
