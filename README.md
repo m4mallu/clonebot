@@ -21,6 +21,8 @@
   </a>  
 </p>
 
+[![Deploy On Railway](https://railway.app/button.svg)](https://github.com/iamLiquidX/clonebot-ui/wiki/Steps-To-Deploy-Railway.app-Platform)
+
 <br>
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot-ui)
