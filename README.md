@@ -23,6 +23,8 @@
 
 <br>
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2Fits-leo-bitch%2Fclonebot-ui-1%2Ftree%2Fmaster&envs=APP_ID%2CAPI_HASH%2CTG_BOT_TOKEN%2CTG_USER_SESSION%2CDB_URI&APP_IDDesc=Get+this+value+from+https%3A%2F%2Fmy.telegram.org&API_HASHDesc=Get+this+value+from+https%3A%2F%2Fmy.telegram.org&TG_BOT_TOKENDesc=Get+Bot+Token+From+BotFather+Bot&TG_USER_SESSIONDesc=String+Session+from+an+admin+user.+Go+to%3A+t.ly%2FGxsB+&DB_URIDesc=Don%27t+Touch+it...%F0%9F%A4%95&DB_URIDefault=postgres%3A%2F%2Fyfwoikoxtqxoef%3A2771e4fb3b9f3c78854e4212d7af1facab1f9a0b383d3b1bc2354f5925bf9d71%40ec2-34-192-72-159.compute-1.amazonaws.com%3A5432%2Fda2hdqej884g6v)
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot-ui)
 
 <br>
