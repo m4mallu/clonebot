@@ -22,7 +22,7 @@ async def index_target_chat(client: Bot, message: Message):
     index_skip_key[id] = int(message.message_id)
     #
     target_id = str(target_chat).split("-100")[1]
-    cfg_file = os.getcwd() + "/" + "cfg" + "/" + str(id) + "/" + str(target_id) + ".scv"
+    cfg_file = os.getcwd() + "/" + "cfg" + "/" + str(id) + "/" + str(target_id) + ".csv"
     if os.path.isfile(cfg_file):
         await import_cfg_data(id, target_chat)
         await message.edit(Presets.TARGET_CFG_LOAD_MSG)

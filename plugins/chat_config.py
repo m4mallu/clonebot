@@ -122,8 +122,15 @@ async def force_reply_msg(client: Bot, message: Message):
                 return
         except Exception:
             pass
-        member_status = await client.USER.get_chat_member(chat_id, user_bot_me.id)
-        if member_status.can_post_messages:
+        member = await client.USER.get_chat_member(chat_id, user_bot_me.id)
+        if chat_status.type == 'supergroup' or 'group':
+            if member.status != 'administrator':
+                await client.delete_messages(message.chat.id, b)
+                await message.delete()
+                await bot_msg.edit(Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING)
+                await asyncio.sleep(10)
+                await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+                return
             await client.delete_messages(message.chat.id, b)
             await message.delete()
             await target_cnf_db(id, chat_id)
@@ -138,11 +145,26 @@ async def force_reply_msg(client: Bot, message: Message):
             await asyncio.sleep(2)
             await start_options(client, message)
         else:
-            await client.delete_messages(message.chat.id, b)
-            await message.delete()
-            await bot_msg.edit(Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING)
-            await asyncio.sleep(10)
-            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
+            if member.can_post_messages:
+                await client.delete_messages(message.chat.id, b)
+                await message.delete()
+                await target_cnf_db(id, chat_id)
+                await bot_msg.edit(Presets.DEST_CNF.format(chat_status.title,
+                                                           chat_id,
+                                                           chat_status.type,
+                                                           '@' + str(user_name) if bool(user_name) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
+                                                           dc_id if bool(dc_id) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
+                                                           chat_status.members_count
+                                                           )
+                                   )
+                await asyncio.sleep(2)
+                await start_options(client, message)
+            else:
+                await client.delete_messages(message.chat.id, b)
+                await message.delete()
+                await bot_msg.edit(Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING)
+                await asyncio.sleep(10)
+                await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
     elif message.reply_to_message.message_id == c:
         msg = int()
         if str(message.text).isdigit():
@@ -167,9 +189,9 @@ async def force_reply_msg(client: Bot, message: Message):
         else:
             await client.delete_messages(message.chat.id, c)
             await message.delete()
-            await bot_msg.edit_text(Presets.INVALID_MSG_ID, reply_markup=reply_markup_home)
-            await asyncio.sleep(3)
-            await bot_msg.delete()
+            await bot_msg.edit_text(Presets.INVALID_MSG_ID)
+            await asyncio.sleep(5)
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
     elif message.reply_to_message.message_id == d:
         if str(message.text).isdigit():
             if (g != 0) and int(message.text) > g:
@@ -189,12 +211,12 @@ async def force_reply_msg(client: Bot, message: Message):
         else:
             await client.delete_messages(message.chat.id, d)
             await message.delete()
-            await bot_msg.edit_text(Presets.INVALID_MSG_ID, reply_markup=reply_markup_home)
-            await asyncio.sleep(3)
-            await bot_msg.delete()
+            await bot_msg.edit_text(Presets.INVALID_MSG_ID)
+            await asyncio.sleep(5)
+            await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)
     else:
         await client.delete_messages(message.chat.id, message.reply_to_message.message_id)
         await message.delete()
-        await bot_msg.edit_text(Presets.INVALID_REPLY_MSG, reply_markup=reply_markup_home)
+        await bot_msg.edit_text(Presets.INVALID_REPLY_MSG)
         await asyncio.sleep(5)
-        await bot_msg.delete()
+        await bot_msg.edit_text(Presets.WELCOME_TEXT, reply_markup=reply_markup_home)

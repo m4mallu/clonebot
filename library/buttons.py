@@ -9,7 +9,7 @@ home_button = [
      InlineKeyboardButton("❓ Help", url="https://telegra.ph/Clonebot-UI-Help-05-30")],
     [InlineKeyboardButton("🎯 Target", "target_btn"),
      InlineKeyboardButton("⬆️  To Id", "up_to_btn"),
-     InlineKeyboardButton("Type  ➡", "types_btn")],
+     InlineKeyboardButton("Types  ➡", "types_btn")],
     [InlineKeyboardButton("Delayed", "delay_btn"),
      InlineKeyboardButton("Caption", "caption_btn"),
      InlineKeyboardButton("FNAC", "f_caption_btn")],

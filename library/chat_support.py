@@ -59,7 +59,7 @@ async def save_target_cfg(id, target_chat):
     if not os.path.isdir(cfg_save_dir):
         os.makedirs(cfg_save_dir)
     chat_id = str(target_chat).split('-100')[1]
-    save_csv_path = cfg_save_dir + "/" + str(chat_id) + ".scv"
+    save_csv_path = cfg_save_dir + "/" + str(chat_id) + ".csv"
     with open(save_csv_path, 'w') as file:
         wr = csv.writer(file, quoting=csv.QUOTE_ALL)
         wr.writerow(master_index)
@@ -68,7 +68,7 @@ async def save_target_cfg(id, target_chat):
 # Function to import the cfg data to master list
 async def import_cfg_data(id, target_chat):
     chat_id = str(target_chat).split("-100")[1]
-    cfg_file = os.getcwd() + "/" + "cfg" + "/" + str(id) + "/" + str(chat_id) + ".scv"
+    cfg_file = os.getcwd() + "/" + "cfg" + "/" + str(id) + "/" + str(chat_id) + ".csv"
     with open(cfg_file, 'r') as file:
         read = list(csv.reader(file))
         index = list(itertools.chain.from_iterable(read))
