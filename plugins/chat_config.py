@@ -123,7 +123,7 @@ async def force_reply_msg(client: Bot, message: Message):
         except Exception:
             pass
         member = await client.USER.get_chat_member(chat_id, user_bot_me.id)
-        if chat_status.type == 'supergroup' or 'group':
+        if str(chat_status.type) in ('supergroup' or 'group'):
             if member.status != 'administrator':
                 await client.delete_messages(message.chat.id, b)
                 await message.delete()
