@@ -28,25 +28,48 @@
       <a href="https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot" target="_blank">
         <img height="30px" src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku">
   </a>
-    </p>
+</p>
 </details>
-
 <details>
   <summary><b>Developer</b></summary>
     <p align="left">
         <img alt="GPL3" src ="https://c.tenor.com/10Zdx_RXqgcAAAAC/programming-crazy.gif" width="260px" style="max-width:100%;"/><br>
             <a href="https://t.me/space4renjith"><b>Renjit Mangal</b></a> &nbsp;|&nbsp;
                 <a href="https://t.me/rmprojects"><b>Update Channel</b></a>
-    </p>
+</p>
 </details>
-
 <details>
   <summary><b>Documentation</b></summary>
     <p align="left">
       <a href="https://telegra.ph/Clonebot-UI-Help-05-30">
         <img src="https://img.shields.io/badge/Read-Documentation-blueviolet?style=for-the-badge&logo=telegraph">
     </a>
-    </p>
+</p>
+</details>
+<details>
+  <summary><b>Support this project</b></summary>
+    <p align="left">
+      <img src="https://telegra.ph/file/42a5623a72bf8cc511521.png" width="260px" style="max-width:100%;"/><br>
+      <a href="https://www.paypal.me/space4renjith" target="_blank">
+        <img src="https://img.shields.io/badge/Donate-Me-blueviolet?style=for-the-badge&logo=paypal">
+    </a>
+</p>
+</details>
+<details>
+  <summary><b>License</b></summary>
+    <p align="left">
+    <a href="https://choosealicense.com/licenses/gpl-3.0/">
+        <img src="https://img.shields.io/badge/License-GPLv3-blueviolet?style=for-the-badge&logo=gplv3">
+    </a>
+</p>      
+</details>
+<details>
+  <summary><b>Credits</b></summary>
+    <p align="left">
+      <a href="https://github.com/pyrogram/pyrogram">
+        <img src="https://img.shields.io/badge/Pyrogram-MTProto%20API-orange?style=for-the-badge&logo=pyrogram">
+    </a>
+</p>
 </details>
 
 <p align="center">
