@@ -15,10 +15,10 @@
         <img src="https://img.shields.io/badge/PYTHON-PROJECT-blueviolet?style=for-the-badge&logo=python">
     </a><br>
     <a href="https://github.com/m4mallu/clonebot/stargazers">
-        <img src="https://img.shields.io/github/stars/m4mallu/clonebot-ui?style=social">
+        <img src="https://img.shields.io/github/stars/m4mallu/clonebot?style=social">
     </a>
     <a href="https://github.com/m4mallu/clonebot/fork">
-        <img src="https://img.shields.io/github/forks/m4mallu/clonebot-ui?label=Fork&style=social">
+        <img src="https://img.shields.io/github/forks/m4mallu/clonebot?label=Fork&style=social">
     </a>  
 </p>
 
