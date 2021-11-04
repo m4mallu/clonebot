@@ -49,7 +49,8 @@
 <details>
   <summary><b>Support this project</b></summary>
     <p align="left">
-      <img src="https://telegra.ph/file/b926b7e8ea84826d81d8a.png" width="260px" style="max-width:100%;"/><br>
+    <b>Buy me a coffee for my work !</b><br><br>
+    <img src="https://telegra.ph/file/b926b7e8ea84826d81d8a.png" width="260px" style="max-width:100%;"/><br><br>
       <a href="https://www.paypal.me/space4renjith" target="_blank">
         <img src="https://img.shields.io/badge/Donate-Me-blueviolet?style=for-the-badge&logo=paypal">
     </a>
