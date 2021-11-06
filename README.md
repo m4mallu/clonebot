@@ -34,8 +34,10 @@
   <summary><b>Developer</b></summary>
     <p align="left">
         <img alt="GPL3" src ="https://c.tenor.com/10Zdx_RXqgcAAAAC/programming-crazy.gif" width="260px" style="max-width:100%;"/><br>
-            <a href="https://t.me/space4renjith"><b>Renjit Mangal</b></a> &nbsp;|&nbsp;
-                <a href="https://t.me/rmprojects"><b>Update Channel</b></a>
+            <a href="https://t.me/space4renjith"><img src="https://img.shields.io/badge/Renjith-Mangal-orange" height="24">
+        </a>&nbsp;
+            <a href="https://t.me/rmprojects"><img src="https://img.shields.io/badge/Updates-Channel-orange" height="24">
+        </a>
 </p>
 </details>
 <details>
@@ -62,7 +64,7 @@
     <a href="https://choosealicense.com/licenses/gpl-3.0/">
         <img src="https://img.shields.io/badge/License-GPLv3-blueviolet?style=for-the-badge&logo=gplv3">
     </a>
-</p>      
+</p>
 </details>
 <details>
   <summary><b>Credits</b></summary>
