@@ -1,7 +1,7 @@
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-#Buttons used
+# Buttons used
 
 home_button = [
     [InlineKeyboardButton("🌏 Source", "source_btn"),
@@ -21,7 +21,7 @@ home_button = [
 
 
 start_button = [
-    [InlineKeyboardButton("🏅 GitHub 🏅", url="github.com/m4mallu/clonebot-ui"),
+    [InlineKeyboardButton("🏅 GitHub 🏅", url="github.com/m4mallu/clonebot"),
      InlineKeyboardButton("⚙️Settings ⚙", "start_btn")]
 ]
 
