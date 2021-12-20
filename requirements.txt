@@ -1,6 +1,7 @@
-pytz
-pyrogram
+aiohttp
+aria2p
+hachoir
+Pillow
+git+git://github.com/pyrogram/pyrogram@asyncio-dev#pyrogram
 tgcrypto
-sqlalchemy~=1.3.23
-psycopg2-binary
-feedparser
+git+git://github.com/sudoshell/youtube-dl@73400cc#youtube_dl
