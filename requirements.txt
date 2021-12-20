@@ -1,7 +1,5 @@
-aiohttp
-aria2p
+pyrogram
+TgCrypto
+python-dotenv
 hachoir
-Pillow
-git+git://github.com/pyrogram/pyrogram@asyncio-dev#pyrogram
-tgcrypto
-git+git://github.com/sudoshell/youtube-dl@73400cc#youtube_dl
+ffmpeg-python

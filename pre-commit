@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+# VideoEncoder - a telegram bot for compressing/encoding videos in h264 format.
+# Copyright (c) 2021 WeebTime/VideoEncoder
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+import glob
+
+LICENSE_HEADER = '''
+# VideoEncoder - a telegram bot for compressing/encoding videos in h264 format.
+# Copyright (c) 2021 WeebTime/VideoEncoder
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published
+# by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+'''.strip()
+
+missing_header = False
+for file in glob.iglob('VideoEncoder/**/*.py', recursive=True):
+    with open(file, 'r') as fileobj:
+        file_header = fileobj.read(len(LICENSE_HEADER))
+    if file_header != LICENSE_HEADER:
+        print(file, 'is missing AGPL license header')
+        missing_header = True
+if missing_header:
+    exit(1)

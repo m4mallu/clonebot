@@ -1,0 +1,32 @@
+──「 Update 0.1 」──
+• Initial commit
+
+──「 Update 1.0 」──
+• Removing useless stuffs.
+• Adding button advertisement.
+
+──「 Update 1.1 」──
+• Fixed video file issue.
+• Cleaning code.
+• More copyright lol.
+• Auth fix.
+
+──「 Update 1.2 」──
+• New Command: /help
+• New Command: /logs
+• New Command: /sthumb, /dthumb
+• Removing logs spam.
+• Precommit file fixed.
+• Variables errors fixed.
+
+──「 Update 1.3 」──
+• New Command: /vset
+• Sort imports
+• Removed useless imports.
+• Removed useless codes.
+• Format python code.
+• print() function use.
+• upload_doc fix.
+• New variables:
+[RESOLUTION, CRF]
+• updates.txt file for updates logs.
