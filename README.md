@@ -25,9 +25,12 @@
 <details>
   <summary><b>Deploy</b></summary>
     <p align="left">
-        For any <b>Code vioate error</b> shown by heroku, fork the repo first, change the deploy button URL to your fork URL, change the <b>Repository</b> URL 
-        in app.json to your fork URL.<br><br>
-      <a href="https://heroku.com/deploy?template=https://github.com/m4mallu/clonebot" target="_blank">
+        <br><b><u>This repository cannot be able deploy in heroku due to some reasons.</u></b><br>To deploy this bot in heroku..<br><br>
+        1. Fork this Repository first.<br>
+        2. Change the URL of 'repository' parameter in <a href="https://github.com/m4mallu/clonebot/blob/master/app.json#L7"> app.json</a> to your fork URL.<br>
+        3. Change the <a href="https://github.com/m4mallu/clonebot/edit/master/README.md#L33"> Deploy button URL</a> to your fork URL.<br>
+        4. Finally, deploy it from your own fork.<br><br>
+      <a href="https://heroku.com/deploy?template=https://github.com/Your-Fork-URL" target="_blank">
         <img height="30px" src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku">
   </a>
 </p>
