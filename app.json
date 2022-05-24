@@ -4,7 +4,7 @@
   "keywords": ["telegram", "best", "Media", "cloning", "copying", "robot"],
   "logo": "https://cdn.dribbble.com/users/1658045/screenshots/4999712/clonelogo-01.png",
   "website": "https://github.com/m4mallu/conebot",
-  "repository": "https://github.com/Your-Fork-URL",
+  "repository": "https://github.com/FoggyGitHub/clonebot",
   "env": {
         "APP_ID": {"description": "Get this value from https://my.telegram.org", "required": true},
         "API_HASH": {"description": "Get this value from https://my.telegram.org" , "required": true},
