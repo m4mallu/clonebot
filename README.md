@@ -48,7 +48,7 @@
 <details>
   <summary><b>Documentation</b></summary>
     <p align="left">
-      <a href="https://telegra.ph/Clonebot-UI-Help-05-30">
+      <a href="https://space4renjith.blogspot.com/2022/05/clonebot-technical-documentation.html">
         <img src="https://img.shields.io/badge/Read-Documentation-blueviolet?style=for-the-badge&logo=telegraph">
     </a>
 </p>

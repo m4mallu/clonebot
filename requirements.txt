@@ -1,5 +1,5 @@
 pytz
-pyrogram
+pyrogram==1.4.8
 tgcrypto
 sqlalchemy~=1.3.23
 psycopg2-binary
