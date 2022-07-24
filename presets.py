@@ -1,34 +1,19 @@
 # ----------------------------------- https://github.com/m4mallu/clonebot --------------------------------------------#
 class Presets(object):
-    START_TEXT = """
-𝙃𝙚𝙡𝙡𝙤... {}
-𝐼 𝑐𝑎𝑛 𝑐𝑙𝑜𝑛𝑒 𝑚𝑒𝑑𝑖𝑎 𝑓𝑟𝑜𝑚 𝑎𝑛𝑦 𝑐ℎ𝑎𝑡 𝑡𝑜 𝑦𝑜𝑢𝑟 𝑝𝑒𝑟𝑠𝑜𝑛𝑎𝑙 𝑐ℎ𝑎𝑡 ! 𝐶𝑙𝑖𝑐𝑘 𝑠𝑒𝑡𝑡𝑖𝑛𝑔𝑠 𝑡𝑜 𝑐𝑜𝑛𝑓𝑖𝑔𝑢𝑟𝑒 𝑚𝑒. 𝐼𝑓 𝑦𝑜𝑢 𝑙𝑖𝑘𝑒 𝑚𝑒, 𝑝𝑙𝑒𝑎𝑠𝑒 𝑔𝑖𝑣𝑒 𝑎 𝑠𝑡𝑎𝑟 𝑖𝑛 𝑚𝑎 𝐺𝑖𝑡𝐻𝑢𝑏 𝑟𝑒𝑝𝑜. 𝑇ℎ𝑎𝑛𝑘𝑠
-    """
+    START_TEXT = "𝙃𝙚𝙡𝙡𝙤... {}\n𝐼 𝑐𝑎𝑛 𝑐𝑙𝑜𝑛𝑒 𝑚𝑒𝑑𝑖𝑎 𝑓𝑟𝑜𝑚 𝑎𝑛𝑦 𝑐ℎ𝑎𝑡 𝑡𝑜 𝑦𝑜𝑢𝑟 " \
+                 "𝑝𝑒𝑟𝑠𝑜𝑛𝑎𝑙 𝑐ℎ𝑎𝑡 ! 𝐶𝑙𝑖𝑐𝑘 𝑠𝑒𝑡𝑡𝑖𝑛𝑔𝑠 𝑡𝑜 𝑐𝑜𝑛𝑓𝑖𝑔𝑢𝑟𝑒 𝑚𝑒. 𝐼𝑓 𝑦𝑜𝑢 " \
+                 "𝑙𝑖𝑘𝑒 𝑚𝑒, 𝑝𝑙𝑒𝑎𝑠𝑒 𝑔𝑖𝑣𝑒 𝑎 𝑠𝑡𝑎𝑟 𝑖𝑛 𝑚𝑎 𝐺𝑖𝑡𝐻𝑢𝑏 𝑟𝑒𝑝𝑜. 𝑇ℎ𝑎𝑛𝑘𝑠 "
     WELCOME_TEXT = "⭑⭑★✪ HELP for more info: ✪★⭑⭑"
-    MESSAGE_COUNT = """
-𝙇𝙞𝙫𝙚: <code>{}\n{}\n{}</code>\n
-𝐒𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐈𝐝 - <b>{}</b>
-𝐍𝐨𝐰@         - <b>{}</b>
-𝐄𝐧𝐝𝐢𝐧𝐠 𝐈𝐝   - <b>{}</b>
+    MESSAGE_COUNT = """ <code>
+CMID             - {}
 
-𝐂𝐥𝐨𝐧𝐞 𝐃𝐞𝐥𝐚𝐲                  - {}
-𝐃𝐞𝐟𝐚𝐮𝐥𝐭 𝐂𝐚𝐩𝐭𝐢𝐨𝐧           - {}
-𝐅𝐢𝐥𝐞 𝐧𝐚𝐦𝐞 𝐚𝐬 𝐂𝐚𝐩𝐭𝐢𝐨𝐧  - {}
+Cloned           - {}
+Process          - {} %󠀥
 
-𝕋𝕠𝕥𝕒𝕝 ℂ𝕠𝕡𝕚𝕖𝕕              - <b>{}</b>
-𝕋𝕠𝕥𝕒𝕝 ℂ𝕠𝕞𝕡𝕝𝕖𝕥𝕖𝕕      - <b>{} %</b> 󠀥
-
-📚 𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭𝐬             - <b>{}</b>
-🎞 𝐕𝐢𝐝𝐞𝐨𝐬                     - <b>{}</b>
-🔊 𝐀𝐮𝐝𝐢𝐨𝐬                     - <b>{}</b>
-📸 𝐏𝐡𝐨𝐭𝐨𝐬                     - <b>{}</b>
-🗣 𝐕𝐨𝐢𝐜𝐞                        - <b>{}</b>
-🧩 𝐃𝐮𝐩𝐥𝐢𝐜𝐚𝐭𝐞 𝐅𝐢𝐥𝐞𝐬       - <b>{}</b>
-
-⏳ 𝐓𝐢𝐦𝐞 𝐓𝐚𝐤𝐞𝐧            - <b>{}</b>
-🆙 𝐁𝐨𝐭 𝐔𝐩𝐭𝐢𝐦𝐞             - <b>{}</b>
-📲 𝐂𝐥𝐨𝐧𝐞 𝐒𝐭𝐚𝐫𝐭𝐞𝐝 𝐀𝐭    - <b>{}</b>
-📌 𝐋𝐚𝐬𝐭 𝐔𝐩𝐝𝐚𝐭𝐞𝐝 𝐎𝐧   - <b>{}</b>
+⏳ Time Taken    - {}
+🆙 Bot Up-time   - {}
+📲 Clone started - {}
+📌 Last updated  - {}</code>
 
 🔰 <a href='t.me/RMProjects'><b>@RMProjects</b></a>     🏅 <a href='https://github.com/m4mallu/clonebot-ui'><b>@Github</b></a>
     """
@@ -41,31 +26,49 @@ class Presets(object):
 𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞𝐬  : @𝐩𝐲𝐭𝐡𝐨𝐧
     """
     SELECTED_TYPE = """
-𝙔𝙤𝙪 𝙝𝙖𝙫𝙚 𝙨𝙚𝙡𝙚𝙘𝙩𝙚𝙙:
-------------------------------
-𝐃𝐨𝐜𝐮𝐦𝐞𝐧𝐭 : {}
-𝐀𝐮𝐝𝐢𝐨         : {}
-𝐕𝐢𝐝𝐞𝐨         : {}
-𝐏𝐡𝐨𝐭𝐨         : {}
-𝐕𝐨𝐢𝐜𝐞          : {}
+You have selected:
+----------------------------
+{} Document
+{} Audio
+{} Video
+{} Photo
+{} Voice
+{} Text
     """
     VIEW_CONF = """
 𝐒𝐨𝐮𝐫𝐜𝐞 𝐈𝐝 : {}
 𝐓𝐚𝐫𝐠𝐞𝐭 𝐈𝐝 : {}
 𝐅𝐫𝐨𝐦 𝐦𝐬𝐠 𝐈𝐝 : {} | 𝐓𝐨 𝐦𝐬𝐠 𝐈𝐝 : {}
-𝐃𝐞𝐥𝐚𝐲𝐞𝐝 : {} | 𝐂𝐚𝐩𝐭𝐢𝐨𝐧 : {} | 𝐅𝐍 𝐂𝐚𝐩𝐭𝐢𝐨𝐧: {}
-𝐓𝐲𝐩𝐞𝐬: 📚:{} | 🎞:{} | 🔊:{} | 📸:{} | 🗣:{}
-    """
-    FILE_TYPES = ["document", "video", "audio", "voice", "photo"]
+𝐃𝐞𝐥𝐚𝐲𝐞𝐝 : {} | 𝐂𝐚𝐩𝐭𝐢𝐨𝐧 : {}"""
+    FILE_TYPES = ["document", "video", "audio", "voice", "photo", "text"]
     COPIED_MESSAGES = "<b><a href='https://github.com/m4mallu/clonebot'>Medias Copied</a></b>"
     IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING = "A̶c̶c̶e̶s̶s̶ ̶D̶e̶n̶i̶e̶d̶\n\n𝘜𝘴𝘦𝘳 𝘪𝘴 𝘯𝘰𝘵 𝘢𝘯 𝘢𝘥𝘮𝘪𝘯 𝘰𝘳 𝘥𝘰𝘦𝘴𝘯'𝘵 𝘩𝘢𝘷𝘦\n" \
                                                   "𝘱𝘰𝘴𝘵𝘪𝘯𝘨 𝘱𝘳𝘪𝘷𝘪𝘭𝘢𝘨𝘦𝘴 𝘪𝘯 𝘵𝘩𝘦 𝘨𝘪𝘷𝘦𝘯 𝘤𝘩𝘢𝘵"
     USER_ABSENT_MSG = "𝙎𝙚𝙨𝙨𝙞𝙤𝙣 𝙪𝙨𝙚𝙧 𝙞𝙨 𝙣𝙤𝙩 𝙞𝙣 𝙩𝙝𝙚 𝙩𝙖𝙧𝙜𝙚𝙩 𝙘𝙝𝙖𝙩 𝙜𝙞𝙫𝙚𝙣"
     CANCEL_CLONE = "𝙎𝙩𝙤𝙥𝙥𝙞𝙣𝙜 𝙩𝙝𝙚 𝙥𝙧𝙤𝙘𝙚𝙨𝙨... 𝙋𝙡𝙯 𝙬𝙖𝙞𝙩 🕚"
     CANCELLED_MSG = "⚠      𝙐𝙨𝙚𝙧 𝙘𝙖𝙣𝙘𝙚𝙡𝙡𝙚𝙙 𝙘𝙡𝙤𝙣𝙞𝙣𝙜      ⚠"
+    RESTART_MSG = "✅ Bot has been restarted successfully ✅"
+    RESTART_MSG_ERROR = "❌ You are not authorized ❌"
+    CAPTION_ERROR = """
+🔊 Custom Caption:
+-------------------------------
+⚠️ A custom caption has been found in my database. Please clear it in CC, before using this feature."""
+    CUSTOM_CAPTION_MSG_CLR = """
+🔊 Custom Caption:
+-------------------------------
+Custom Caption message has been cleared successfully ✅"""
+    TEXT_UPDATE_MSG = "<code>Do you want to set this text as a custom caption?</code>"
+    CUSTOM_CAPTION_MSG = """
+🔊 Custom Caption:
+-------------------------------
+Send any text to the bot chat and follow the instructions to set a custom caption."""
+    CUSTOM_CAPTION_CNF = """
+🔊 Custom Caption:
+-------------------------------
+Custom caption message has been set successfully ✅"""
     INITIAL_MESSAGE_TEXT = "🔎  𝙄𝙣𝙞𝙩𝙞𝙖𝙡𝙞𝙯𝙞𝙣𝙜 𝙘𝙡𝙤𝙣𝙚  🔎"
     WAIT_MSG = "♻️ 𝙋𝙧𝙤𝙘𝙚𝙨𝙨𝙞𝙣𝙜... 𝙥𝙡𝙯 𝙬𝙖𝙞𝙩 "
-    SOURCE_CONFIRM = """
+    SOURCE_CNF = """
 𝐂𝐡𝐚𝐭 𝐍𝐚𝐦𝐞: {}
 𝐂𝐡𝐚𝐭 𝐈𝐝: <code> {}</code>
 𝐂𝐡𝐚𝐭 𝐓𝐲𝐩𝐞: {}
@@ -132,6 +135,8 @@ H̶e̶r̶o̶k̶u̶ f̶r̶e̶e̶ d̶y̶n̶o̶s̶ r̶e̶s̶t̶a̶r̶t̶s̶ .
     RM_PIC = "𝙁𝙞𝙡𝙚 𝙩𝙮𝙥𝙚 👉 𝙋𝙝𝙤𝙩𝙤 👈 𝙞𝙜𝙣𝙤𝙧𝙚𝙙 "
     ADD_VOI = "𝙁𝙞𝙡𝙚 𝙩𝙮𝙥𝙚 👉 𝙑𝙤𝙞𝙘𝙚 👈 𝙖𝙙𝙙𝙚𝙙"
     RM_VOI = "𝙁𝙞𝙡𝙚 𝙩𝙮𝙥𝙚 👉 𝙑𝙤𝙞𝙘𝙚 👈 𝙞𝙜𝙣𝙤𝙧𝙚𝙙 "
+    ADD_TXT = "𝙁𝙞𝙡𝙚 𝙩𝙮𝙥𝙚 👉 𝙏𝙚𝙭𝙩 👈 𝙖𝙙𝙙𝙚𝙙"
+    RM_TXT = "𝙁𝙞𝙡𝙚 𝙩𝙮𝙥𝙚 👉 𝙏𝙚𝙭𝙩 👈 𝙞𝙜𝙣𝙤𝙧𝙚𝙙 "
     BLANK = "➖➖➖➖➖➖➖➖➖➖➖➖➖"
     BLOCK = "ᴘʀᴏɢʀᴇꜱꜱ ꜰᴀɪʟᴇᴅ ᴛᴏ ᴅɪꜱᴘʟᴀʏ :👉 ʜᴇʟᴘ"
     CAPTION_ON = "𝘾𝙖𝙥𝙩𝙞𝙤𝙣 𝙤𝙣 𝙛𝙞𝙡𝙚𝙨 : 𝘼𝙘𝙩𝙞𝙫𝙖𝙩𝙚𝙙 ✅"
@@ -143,10 +148,48 @@ H̶e̶r̶o̶k̶u̶ f̶r̶e̶e̶ d̶y̶n̶o̶s̶ r̶e̶s̶t̶a̶r̶t̶s̶ .
     TEST_MSG = "Test Message"
     OVER_FLOW = "𝙈𝙖𝙭𝙞𝙢𝙪𝙢 𝙡𝙞𝙢𝙞𝙩 𝙞𝙨 𝙚𝙭𝙘𝙚𝙚𝙙𝙚𝙙 !\n𝘾𝙝𝙚𝙘𝙠 𝙩𝙝𝙚 𝙖𝙡𝙡𝙤𝙬𝙚𝙙 𝙡𝙞𝙢𝙞𝙩, 𝙏𝙧𝙮 𝙖𝙜𝙖𝙞𝙣 !"
     SELECT_TYPE = "👉 𝙎𝙚𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙬𝙞𝙡𝙡 𝙗𝙚 𝙩𝙤𝙜𝙜𝙡𝙚𝙙 𝙤𝙣 𝙩𝙖𝙥\n𝘈𝘭𝘭 𝘢𝘳𝘦 𝘴𝘦𝘭𝘦𝘤𝘵𝘦𝘥 𝘣𝘺 𝘥𝘦𝘧𝘢𝘶𝘭𝘵 !"
+    DUPLICATE_INDEX = """
+<b>Skipping duplicate files</b><code>
+
+Message id       -      {}
+Total files      -      {}
+
+Please wait...</code> """
+    CLONE_REPORT_CAPTION = "<b>Clone Report</b>"
     INDEXING_MSG = "𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙖𝙞𝙩..\n<i>Finding duplicate messages in the\ntarget chat. This will " \
                    "take some\ntime to figure out.</i>\n\n<b><u>Message id</u>:-\n🔷Now@: {}\n🔷End@ : {}\n\n" \
                    "<u>Duplicates</u>:-\n⚠Total: {}</b>"
     PURGE_PROMPT = "👉 <b>{}</b>  👈 <i>Duplicate files found in your target chat. Do you wish to purge it now ?</i>"
     PROCESSING_PURGE = "<b>🔷Now@: {}        🔷End@: {}</b>\n\n<i>𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠.. Please Wait</i>"
     TARGET_CFG_LOAD_MSG = "<b><u>Imported</u>  ✅</b>\n\n<code>An index of the given target chat found in my database. " \
-                          "It has been loaded to ma memory.</code>\n\n<b><i>Proceeding to clone..</i></b>"
+                          "It has been loaded to my memory.</code>\n\n<b><i>Proceeding to clone..</i></b>"
+    CLONE_REPORT = """
+🔰 <b>Report on cloning</b> 🔰
+
+Finished time : <b>{}</b>
+
+Source Chat : <code>{}</code>
+Target Chat  : <code>{}</code>
+
+Started at Id - {}
+Ended at Id   - {}
+
+🕐 Delayed        - {}
+✍️ Caption        - {}
+🏷 FNAC            - {}
+
+<b>Files Cloned</b>  - {}
+
+📚 Documents     - {}
+🎞 Videos             - {}
+🔊 Audios             - {}
+📸 Photos             - {}
+🗣 Voice                - {}
+📝 Text                  - {}
+⚠️ Duplicates       - {}
+
+<u><b>Credits:</u></b> https://github.com/m4mallu
+"""
+    GET_CHAT_ID_MSG = "<b>You have been forwaded a message\nfrom a chat having the id:</b>\n\n<code>{" \
+                      "}</code>\n<b>Message Id: </b><code>{}</code>\n\n<i>Tap the above text to copy !</i> "
+    CLONE_REPORT_INFO = "A report has been generted in your SAVED MESSAGES folder. Thank you for using this bot 🤝"

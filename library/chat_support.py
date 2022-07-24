@@ -1,6 +1,7 @@
-#----------------------------------- https://github.com/m4mallu/clonebot-ui -----------------------------------------#
+#----------------------------------- https://github.com/m4mallu/clonebot ----------------------------------------------#
 import os
 import csv
+import time
 import shutil
 import asyncio
 import itertools
@@ -13,28 +14,28 @@ from library.sql import file_types, msg_id_limit, to_msg_id_cnf_db, master_index
 async def find_msg_id(client, id, chat_id):
     id_last_msg = int()
     try:
-        async for user_message in client.USER.iter_history(chat_id):
-            messages = await client.USER.get_messages(chat_id, user_message.message_id, replies=0)
+        async for user_message in client.USER.get_chat_history(chat_id):
+            messages = await client.USER.get_messages(chat_id, user_message.id, replies=0)
             for file_type in file_types:
                 media = getattr(messages, file_type, None)
                 if media is not None:
-                    id_last_msg = str(messages.message_id).split(" ")[0]
+                    id_last_msg = str(messages.id).split(" ")[0]
                     await msg_id_limit(id, id_last_msg)
                     await to_msg_id_cnf_db(id, id_last_msg)
                     file_types.clear()
                     file_types.extend(Presets.FILE_TYPES)
                     return
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
     except Exception:
         pass
 
 
 # Function to find percentage of the total process
-async def calc_percentage(sp, ep, message_id):
+async def calc_percentage(sp, ep, msg_id):
     const = pct = int()
     const = (ep - sp) + 1
-    pct = ((message_id + const) - ep) / const * 100  # Credits to ma wife to find a formula !
+    pct = ((msg_id + const) - ep) / const * 100  # Credits to my wife to find a formula !
     return pct
 
 
@@ -45,7 +46,7 @@ async def calc_progress(pct):
     return progress
 
 
-# Function to find DC Id:
+# Function to find DC ID:
 async def find_dc(chat_status):
     dc = chat_status.dc_id
     dc_id = {dc == 1: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟏]", dc == 2: "𝙰𝚖𝚜𝚝𝚎𝚛𝚍𝚊𝚖, 𝙽𝙻 [𝐃𝐂 𝟐]", dc == 3: "𝙼𝚒𝚊𝚖𝚒 𝙵𝙻, 𝚄𝚂𝙰 [𝐃𝐂 𝟑]",
@@ -88,3 +89,8 @@ async def del_user_cfg(id):
             shutil.rmtree(cfg_path)
         except Exception:
             pass
+
+
+# Function to get the current time
+async def get_time():
+    return time.strftime("%I:%M %p")

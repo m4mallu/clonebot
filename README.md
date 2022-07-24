@@ -64,6 +64,26 @@
 </p>
 </details>
 <details>
+  <summary><b>Releases</b></summary>
+    <p align="left">
+    <a href="https://github.com/m4mallu/clonebot/releases/tag/1.1">
+        <img src="https://img.shields.io/badge/RELEASE-1.1-orange?style=for-the-badge&logo=gplv3">
+    </a>
+    <a href="https://github.com/m4mallu/clonebot/releases/tag/1.2">
+        <img src="https://img.shields.io/badge/RELEASE-1.2-orange?style=for-the-badge&logo=gplv3">
+    </a>
+    <a href="https://github.com/m4mallu/clonebot/releases/tag/1.3">
+        <img src="https://img.shields.io/badge/RELEASE-1.3-orange?style=for-the-badge&logo=gplv3">
+    </a>
+    <a href="https://github.com/m4mallu/clonebot/releases/tag/1.4">
+        <img src="https://img.shields.io/badge/RELEASE-1.4-orange?style=for-the-badge&logo=gplv3">
+    </a>
+    <a href="https://github.com/m4mallu/clonebot/releases/tag/1.5">
+        <img src="https://img.shields.io/badge/RELEASE-1.5-orange?style=for-the-badge&logo=gplv3">
+    </a>
+</p>
+</details>
+<details>
   <summary><b>License</b></summary>
     <p align="left">
     <a href="https://choosealicense.com/licenses/gpl-3.0/">

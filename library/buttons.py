@@ -1,59 +1,98 @@
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Buttons used
 
 home_button = [
-    [InlineKeyboardButton("🌏 Source", "source_btn"),
-     InlineKeyboardButton("⬇️  Fr. Id", "from_btn"),
-     InlineKeyboardButton("❓ Help", url="https://telegra.ph/Clonebot-UI-Help-05-30")],
-    [InlineKeyboardButton("🎯 Target", "target_btn"),
-     InlineKeyboardButton("⬆️  To Id", "up_to_btn"),
-     InlineKeyboardButton("Types  ➡", "types_btn")],
-    [InlineKeyboardButton("Delayed", "delay_btn"),
-     InlineKeyboardButton("Caption", "caption_btn"),
-     InlineKeyboardButton("FNAC", "f_caption_btn")],
-    [InlineKeyboardButton("🔎️  View", "view_btn"),
-     InlineKeyboardButton("🚮  Reset", "rst_btn"),
-     InlineKeyboardButton("❌  Close", "close_btn")],
-    [InlineKeyboardButton("🚦 Clone Medias 🚦", "clone_btn")]
+    [
+        InlineKeyboardButton("🌏 Source", "source_btn"),
+        InlineKeyboardButton("⬇️  Fr. Id", "from_btn"),
+        InlineKeyboardButton("❓ Help", url="https://bit.ly/3z2jquF")
+    ],
+    [
+        InlineKeyboardButton("🎯 Target", "target_btn"),
+        InlineKeyboardButton("⬆️  To Id", "up_to_btn"),
+        InlineKeyboardButton("Types  ➡", "types_btn")
+    ],
+    [
+        InlineKeyboardButton("Delayed", "delay_btn"),
+        InlineKeyboardButton("Caption", "caption_btn"),
+        InlineKeyboardButton("FNAC", "f_caption_btn")
+    ],
+    [
+        InlineKeyboardButton("🔎️  View", "view_btn"),
+        InlineKeyboardButton("✍️ CC", "cust_captn_btn"),
+        InlineKeyboardButton("❌  Close", "close_btn")
+    ],
+    [
+        InlineKeyboardButton("🗑  Reset", "rst_btn"),
+        InlineKeyboardButton("🔄  Restart", "restart_btn")
+    ],
+    [
+        InlineKeyboardButton("🚦 Clone Messages 🚦", "clone_btn")
+    ]
 ]
 
 
 start_button = [
-    [InlineKeyboardButton("🏅 GitHub 🏅", url="github.com/m4mallu/clonebot"),
-     InlineKeyboardButton("⚙️Settings ⚙", "start_btn")]
+    [
+        InlineKeyboardButton("🏅 GitHub 🏅", url="github.com/m4mallu/clonebot"),
+        InlineKeyboardButton("⚙️Settings ⚙", "start_btn")
+    ]
 ]
 
 
 types_button = [
-    [InlineKeyboardButton(" ⏺ Docs", "docs_btn"),
-     InlineKeyboardButton(" ⏺ Video", "video_btn"),
-     InlineKeyboardButton(" ⏺ Audio", "audio_btn")],
-    [InlineKeyboardButton(" ⏺ Photo", "photo_btn"),
-     InlineKeyboardButton(" ⏺ Voice", "voice_btn"),
-     InlineKeyboardButton("⚙️ View", "view_types")],
-    [InlineKeyboardButton("⬅️ Back", "start_btn")]
+    [
+        InlineKeyboardButton("Docs ✅", "docs_yes_btn"),
+        InlineKeyboardButton("Video ✅", "video_yes_btn"),
+        InlineKeyboardButton("Audio ✅", "audio_yes_btn")
+    ],
+    [
+        InlineKeyboardButton("Photo ✅", "photo_yes_btn"),
+        InlineKeyboardButton("Voice ✅", "voice_yes_btn"),
+        InlineKeyboardButton("Text ✅", "text_yes_btn")
+    ],
+    [
+        InlineKeyboardButton("⚙️ View", "view_types"),
+        InlineKeyboardButton("⬅️ Back", "start_btn")
+    ]
 ]
 
 
 stop_button = [
-    [InlineKeyboardButton("🚫 STOP 🚫", "stop_clone")]
+    [
+        InlineKeyboardButton("🚫 STOP 🚫", "stop_clone")
+    ]
 ]
 
 
 finished_button = [
-    [InlineKeyboardButton("🏠  HOME", "start_btn"),
-     InlineKeyboardButton("❌  CLOSE", "close_btn")]
+    [
+        InlineKeyboardButton("Home", "start_btn"),
+        InlineKeyboardButton("Close", "close_btn")
+    ]
+]
+
+
+close_button = [
+    [
+        InlineKeyboardButton("Delete", "close_btn"),
+        InlineKeyboardButton("Close", "clear_btn")
+    ]
 ]
 
 
 terminate_btn = [
-    [InlineKeyboardButton("🧸 Updates", url="https://github.com/m4mallu/clonebot-ui"),
-     InlineKeyboardButton("❓ Usage", url="https://telegra.ph/Clonebot-UI-Help-05-30")],
-    [InlineKeyboardButton("🚫 Terminate", "terminate_btn"),
-     InlineKeyboardButton("🏠 Home", "start_btn")]
+    [
+        InlineKeyboardButton("🧸 Updates", url="https://github.com/m4mallu/clonebot"),
+        InlineKeyboardButton("❓ Usage", url="https://bit.ly/3z2jquF")
+    ],
+    [
+        InlineKeyboardButton("🚫 Terminate", "terminate_btn"),
+        InlineKeyboardButton("🏠 Home", "start_btn")
+    ]
 ]
+
 
 indexing_skip_button = [
         [
@@ -61,11 +100,13 @@ indexing_skip_button = [
         ]
     ]
 
+
 purging_skip_button = [
         [
             InlineKeyboardButton("🕹 Skip", "purge_skip_btn")
         ]
     ]
+
 
 purge_button = [
     [
@@ -74,7 +115,13 @@ purge_button = [
     ]
 ]
 
-# markups used
+caption_cnf_button = [
+    [
+        InlineKeyboardButton("YES ✅", "capt_cnf_yes_btn"),
+        InlineKeyboardButton("NO ❌", "capt_cnf_no_btn")
+    ]
+]
+
 
 reply_markup_purge = InlineKeyboardMarkup(purge_button)
 
@@ -93,3 +140,7 @@ reply_markup_terminate = InlineKeyboardMarkup(terminate_btn)
 reply_markup_finished = InlineKeyboardMarkup(finished_button)
 
 reply_markup_types_button = InlineKeyboardMarkup(types_button)
+
+reply_markup_close = InlineKeyboardMarkup(close_button)
+
+reply_markup_cap_cnf = InlineKeyboardMarkup(caption_cnf_button)

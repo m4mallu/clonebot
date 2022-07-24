@@ -11,8 +11,9 @@ clone_btn_count = {}        # Clone button single click actuator key
 index_skip_key = {}         # Skip indexing function key
 purge_skip_key = {}         # Purge function key
 
-master_index = []               # Unique Id index of cloning medias (including target chat)
-file_types = ["document", "video", "audio", "voice", "photo"]
+custom_caption = {}         # Custom caption key
+master_index = []           # Unique id index of cloning medias (including target chat)
+file_types = ["document", "video", "audio", "voice", "photo", "text"]
 
 if bool(os.environ.get("ENV", False)):
     from sample_config import Config
