@@ -23,8 +23,7 @@ async def clone_medias(bot: Bot, m: Message):
     clone_cancel_key[id] = int(m.id)
     #
     clone_start_time = time.time()
-    start_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M:%S %p')
-    uptime = time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - bot_start_time))
+    start_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M %p')
     #
     file_name = caption = str()
     #
@@ -132,8 +131,8 @@ async def clone_medias(bot: Bot, m: Message):
                             #
                             total_copied = doc + video + audio + voice + photo + text
                             pct = await calc_percentage(sp, ep, msg_id)
-                            time_taken = time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - clone_start_time))
-                            update_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M:%S %p')
+                            time_taken = time.strftime("%Hh %Mm", time.gmtime(time.time() - clone_start_time))
+                            update_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M %p')
                             try:
                                 await m.edit(
                                     Presets.MESSAGE_COUNT.format(
@@ -141,7 +140,6 @@ async def clone_medias(bot: Bot, m: Message):
                                         int(total_copied),
                                         trunc(pct) if pct <= 100 else "- ",
                                         time_taken,
-                                        uptime,
                                         start_time,
                                         update_time
                                     ),

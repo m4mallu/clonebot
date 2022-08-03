@@ -4,19 +4,30 @@ class Presets(object):
                  "𝑝𝑒𝑟𝑠𝑜𝑛𝑎𝑙 𝑐ℎ𝑎𝑡 ! 𝐶𝑙𝑖𝑐𝑘 𝑠𝑒𝑡𝑡𝑖𝑛𝑔𝑠 𝑡𝑜 𝑐𝑜𝑛𝑓𝑖𝑔𝑢𝑟𝑒 𝑚𝑒. 𝐼𝑓 𝑦𝑜𝑢 " \
                  "𝑙𝑖𝑘𝑒 𝑚𝑒, 𝑝𝑙𝑒𝑎𝑠𝑒 𝑔𝑖𝑣𝑒 𝑎 𝑠𝑡𝑎𝑟 𝑖𝑛 𝑚𝑎 𝐺𝑖𝑡𝐻𝑢𝑏 𝑟𝑒𝑝𝑜. 𝑇ℎ𝑎𝑛𝑘𝑠 "
     WELCOME_TEXT = "⭑⭑★✪ HELP for more info: ✪★⭑⭑"
-    MESSAGE_COUNT = """ <code>
-CMID             - {}
-
-Cloned           - {}
-Process          - {} %󠀥
-
-⏳ Time Taken    - {}
-🆙 Bot Up-time   - {}
-📲 Clone started - {}
-📌 Last updated  - {}</code>
-
-🔰 <a href='t.me/RMProjects'><b>@RMProjects</b></a>     🏅 <a href='https://github.com/m4mallu/clonebot-ui'><b>@Github</b></a>
-    """
+    MESSAGE_COUNT = """
+╭──────⌈ 📥 Cloning ⌋──────╮<code>
+├ CMID - {}
+├ Transfers - {}
+├ Progress - {} %
+├ Time taken - {}
+├ Clone started - {}
+├ Last updated  - {}</code>
+├  🔰 <a href='t.me/RMProjects'><b>@RMProjects</b></a> || 🏅 <a href='https://github.com/m4mallu/clonebot-ui'><b>@Github</b></a>
+╰──────⌈ 💢 Clonebot ⌋─────╯"""
+    DUPLICATE_INDEX = """
+╭──────⌈ ⚠️ Skipping ⌋──────╮<code>
+├ CMID - {}
+├ Total - {}</code>
+╰──────⌈ 💢 Clonebot ⌋──────╯"""
+    INDEXING_MSG = """
+╭─────⌈ ⚠️ Indexing ⌋─────╮<code>
+├ Indexing target chat
+├
+├ CMID - {}
+├ LMID - {}
+├ Duplicates - {}</code>
+╰─────⌈ 💢 Clonebot ⌋─────╯
+\xad             \xad"""
     INFO_CHAT_TYPES = """
 𝙔𝙤𝙪 𝙘𝙖𝙣 𝙚𝙣𝙩𝙚𝙧 𝙩𝙝𝙚 𝙛𝙤𝙡𝙡𝙤𝙬𝙞𝙣𝙜 𝙩𝙮𝙥𝙚𝙨:
 
@@ -148,17 +159,7 @@ H̶e̶r̶o̶k̶u̶ f̶r̶e̶e̶ d̶y̶n̶o̶s̶ r̶e̶s̶t̶a̶r̶t̶s̶ .
     TEST_MSG = "Test Message"
     OVER_FLOW = "𝙈𝙖𝙭𝙞𝙢𝙪𝙢 𝙡𝙞𝙢𝙞𝙩 𝙞𝙨 𝙚𝙭𝙘𝙚𝙚𝙙𝙚𝙙 !\n𝘾𝙝𝙚𝙘𝙠 𝙩𝙝𝙚 𝙖𝙡𝙡𝙤𝙬𝙚𝙙 𝙡𝙞𝙢𝙞𝙩, 𝙏𝙧𝙮 𝙖𝙜𝙖𝙞𝙣 !"
     SELECT_TYPE = "👉 𝙎𝙚𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙬𝙞𝙡𝙡 𝙗𝙚 𝙩𝙤𝙜𝙜𝙡𝙚𝙙 𝙤𝙣 𝙩𝙖𝙥\n𝘈𝘭𝘭 𝘢𝘳𝘦 𝘴𝘦𝘭𝘦𝘤𝘵𝘦𝘥 𝘣𝘺 𝘥𝘦𝘧𝘢𝘶𝘭𝘵 !"
-    DUPLICATE_INDEX = """
-<b>Skipping duplicate files</b><code>
-
-Message id       -      {}
-Total files      -      {}
-
-Please wait...</code> """
     CLONE_REPORT_CAPTION = "<b>Clone Report</b>"
-    INDEXING_MSG = "𝙋𝙡𝙚𝙖𝙨𝙚 𝙬𝙖𝙞𝙩..\n<i>Finding duplicate messages in the\ntarget chat. This will " \
-                   "take some\ntime to figure out.</i>\n\n<b><u>Message id</u>:-\n🔷Now@: {}\n🔷End@ : {}\n\n" \
-                   "<u>Duplicates</u>:-\n⚠Total: {}</b>"
     PURGE_PROMPT = "👉 <b>{}</b>  👈 <i>Duplicate files found in your target chat. Do you wish to purge it now ?</i>"
     PROCESSING_PURGE = "<b>🔷Now@: {}        🔷End@: {}</b>\n\n<i>𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠.. Please Wait</i>"
     TARGET_CFG_LOAD_MSG = "<b><u>Imported</u>  ✅</b>\n\n<code>An index of the given target chat found in my database. " \
@@ -192,4 +193,4 @@ Ended at Id   - {}
 """
     GET_CHAT_ID_MSG = "<b>You have been forwaded a message\nfrom a chat having the id:</b>\n\n<code>{" \
                       "}</code>\n<b>Message Id: </b><code>{}</code>\n\n<i>Tap the above text to copy !</i> "
-    CLONE_REPORT_INFO = "A report has been generted in your SAVED MESSAGES folder. Thank you for using this bot 🤝"
+    CLONE_REPORT_INFO = "A report has been generted in your SAVED MESSAGES folder. Thanks for using this bot 🤝"

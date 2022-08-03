@@ -26,10 +26,13 @@ async def start_settings(client: Bot, cb: CallbackQuery):
         return
     await add_user(id)
     await cb.answer()
-    await cb.message.edit_text(Presets.WELCOME_TEXT,
-                               reply_markup=reply_markup_home,
-                               parse_mode=ParseMode.MARKDOWN
-                               )
+    try:
+        await cb.message.edit_text(Presets.WELCOME_TEXT,
+                                   reply_markup=reply_markup_home,
+                                   parse_mode=ParseMode.MARKDOWN
+                                   )
+    except Exception:
+        pass
 
 
 @Client.on_callback_query(filters.regex(r'^view_btn$'))
