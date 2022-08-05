@@ -97,52 +97,52 @@ async def set_types(client: Bot, cb: CallbackQuery):
 async def file_types_select(_, cb: CallbackQuery):
     text = Presets.SELECT_TYPE
     if cb.data == "docs_yes_btn":
+        await cb.answer()
         file_types.remove("document")
-        await cb.answer(Presets.RM_DOC)
         opt_type_btns[0][0] = InlineKeyboardButton("Docs ❌", callback_data="docs_no_btn")
     elif cb.data == "docs_no_btn":
+        await cb.answer()
         file_types.append("document")
-        await cb.answer(Presets.ADD_DOC)
         opt_type_btns[0][0] = InlineKeyboardButton("Docs ✅", callback_data="docs_yes_btn")
     elif cb.data == "video_yes_btn":
+        await cb.answer()
         file_types.remove("video")
-        await cb.answer(Presets.RM_VID)
         opt_type_btns[0][1] = InlineKeyboardButton("Video ❌", callback_data="video_no_btn")
     elif cb.data == "video_no_btn":
+        await cb.answer()
         file_types.append("video")
-        await cb.answer(Presets.ADD_VID)
         opt_type_btns[0][1] = InlineKeyboardButton("Video ✅", callback_data="video_yes_btn")
     elif cb.data == "audio_yes_btn":
+        await cb.answer()
         file_types.remove("audio")
-        await cb.answer(Presets.RM_AUD)
         opt_type_btns[0][2] = InlineKeyboardButton("Audio ❌", callback_data="audio_no_btn")
     elif cb.data == "audio_no_btn":
+        await cb.answer()
         file_types.append("audio")
-        await cb.answer(Presets.ADD_AUD)
         opt_type_btns[0][2] = InlineKeyboardButton("Audio ✅", callback_data="audio_yes_btn")
     elif cb.data == "photo_yes_btn":
+        await cb.answer()
         file_types.remove("photo")
-        await cb.answer(Presets.RM_PIC)
         opt_type_btns[1][0] = InlineKeyboardButton("Photo ❌", callback_data="photo_no_btn")
     elif cb.data == "photo_no_btn":
+        await cb.answer()
         file_types.append("photo")
-        await cb.answer(Presets.ADD_PIC)
         opt_type_btns[1][0] = InlineKeyboardButton("Photo ✅", callback_data="photo_yes_btn")
     elif cb.data == "voice_yes_btn":
+        await cb.answer()
         file_types.remove("voice")
-        await cb.answer(Presets.RM_VOI)
         opt_type_btns[1][1] = InlineKeyboardButton("Voice ❌", callback_data="voice_no_btn")
     elif cb.data == "voice_no_btn":
+        await cb.answer()
         file_types.append("voice")
-        await cb.answer(Presets.ADD_VOI)
         opt_type_btns[1][1] = InlineKeyboardButton("Voice ✅", callback_data="voice_yes_btn")
     elif cb.data == "text_yes_btn":
+        await cb.answer()
         file_types.remove("text")
-        await cb.answer(Presets.RM_TXT)
         opt_type_btns[1][2] = InlineKeyboardButton("Text ❌", callback_data="text_no_btn")
     elif cb.data == "text_no_btn":
+        await cb.answer()
         file_types.append("text")
-        await cb.answer(Presets.ADD_TXT)
         opt_type_btns[1][2] = InlineKeyboardButton("Text ✅", callback_data="text_yes_btn")
     try:
         await cb.message.edit_text(text, reply_markup=InlineKeyboardMarkup(opt_type_btns))

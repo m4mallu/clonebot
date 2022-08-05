@@ -6,7 +6,9 @@ import shutil
 import asyncio
 import itertools
 from presets import Presets
+from library.sql import reset_all
 from pyrogram.errors import FloodWait
+from plugins.cb_input import update_type_buttons
 from library.sql import file_types, msg_id_limit, to_msg_id_cnf_db, master_index
 
 
@@ -94,3 +96,11 @@ async def del_user_cfg(id):
 # Function to get the current time
 async def get_time():
     return time.strftime("%I:%M %p")
+
+
+# Functions to set the bot vaiables to default values
+async def set_to_defaults(id):
+    await reset_all(id)
+    file_types.clear()
+    file_types.extend(Presets.FILE_TYPES)
+    await update_type_buttons()
