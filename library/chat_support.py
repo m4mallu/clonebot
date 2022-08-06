@@ -7,6 +7,7 @@ import asyncio
 import itertools
 from presets import Presets
 from library.sql import reset_all
+from pyrogram.enums import ChatType
 from pyrogram.errors import FloodWait
 from plugins.cb_input import update_type_buttons
 from library.sql import file_types, msg_id_limit, to_msg_id_cnf_db, master_index
@@ -104,3 +105,16 @@ async def set_to_defaults(id):
     file_types.clear()
     file_types.extend(Presets.FILE_TYPES)
     await update_type_buttons()
+
+
+# function to get the chat type of the source/target chat
+async def get_chat_type(chat_status):
+    x = chat_status.type
+    chat_status = {
+                           x == ChatType.CHANNEL: 'CHANNEL',
+                           x == ChatType.SUPERGROUP: 'SUPERGROUP',
+                           x == ChatType.GROUP: 'GROUP',
+                           x == ChatType.PRIVATE: 'PRIVATE',
+                           x == ChatType.BOT: 'BOT'
+    }.get(True)
+    return chat_status

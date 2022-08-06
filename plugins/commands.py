@@ -8,7 +8,7 @@ from presets import Presets
 from pyrogram.types import Message
 from pyrogram.enums import ParseMode
 from pyrogram.errors import FloodWait
-from library.chat_support import find_msg_id, find_dc
+from library.chat_support import find_msg_id, find_dc, get_chat_type
 from pyrogram import Client, filters, ContinuePropagation, StopPropagation
 from library.buttons import (reply_markup_start, reply_markup_home, reply_markup_close,
                              reply_markup_cap_cnf, reply_markup_terminate)
@@ -131,7 +131,7 @@ async def force_reply_msg(client: Bot, message: Message):
         await bot_msg.edit(Presets.SOURCE_CNF.format(
             chat_status.title,
             chat_id,
-            chat_status.type,
+            await get_chat_type(chat_status),
             '@' + str(user_name) if bool(user_name) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
             dc_id if bool(dc_id) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
             chat_status.members_count),
@@ -179,7 +179,7 @@ async def force_reply_msg(client: Bot, message: Message):
             await bot_msg.edit(Presets.DEST_CNF.format(
                 chat_status.title,
                 chat_id,
-                chat_status.type,
+                await get_chat_type(chat_status),
                 '@' + str(user_name) if bool(user_name) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
                 dc_id if bool(dc_id) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
                 chat_status.members_count),
@@ -194,7 +194,7 @@ async def force_reply_msg(client: Bot, message: Message):
                 await bot_msg.edit(Presets.DEST_CNF.format(
                     chat_status.title,
                     chat_id,
-                    chat_status.type,
+                    await get_chat_type(chat_status),
                     '@' + str(user_name) if bool(user_name) else "𝘗𝘳𝘪𝘷𝘢𝘵𝘦 𝘤𝘩𝘢𝘵",
                     dc_id if bool(dc_id) else "𝘊𝘩𝘢𝘵 𝘱𝘩𝘰𝘵𝘰 𝘳𝘦𝘲𝘶𝘪𝘳𝘦𝘥",
                     chat_status.members_count),
