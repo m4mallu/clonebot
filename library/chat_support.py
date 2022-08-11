@@ -6,10 +6,11 @@ import shutil
 import asyncio
 import itertools
 from presets import Presets
+from datetime import datetime
 from library.sql import reset_all
-from pyrogram.enums import ChatType
 from pyrogram.errors import FloodWait
 from plugins.cb_input import update_type_buttons
+from pyrogram.enums import ChatType, ChatMemberStatus
 from library.sql import file_types, msg_id_limit, to_msg_id_cnf_db, master_index
 
 
@@ -94,9 +95,11 @@ async def del_user_cfg(id):
             pass
 
 
-# Function to get the current time
-async def get_time():
-    return time.strftime("%I:%M %p")
+# Function to calculate the time and date difference between two dates
+async def date_time_calc(start_date, start_time, cur_date, cur_time):
+    time_diff = time.strftime("%Hh %Mm", time.gmtime(cur_time - start_time))
+    date_diff = (datetime.strptime(cur_date, "%d/%m/%y") - datetime.strptime(start_date, "%d/%m/%y")).days
+    return f'{date_diff}D', time_diff
 
 
 # Functions to set the bot vaiables to default values
@@ -118,3 +121,17 @@ async def get_chat_type(chat_status):
                            x == ChatType.BOT: 'BOT'
     }.get(True)
     return chat_status
+
+
+# Function to get the status of the chat member in groups and supergroups
+async def get_chat_member_status(member):
+    x = member.status
+    chat_member_status = {
+                           x == ChatMemberStatus.OWNER: 'OWNER',
+                           x == ChatMemberStatus.ADMINISTRATOR: 'ADMINISTRATOR',
+                           x == ChatMemberStatus.MEMBER: 'MEMBER',
+                           x == ChatMemberStatus.RESTRICTED: 'RESTRICTED',
+                           x == ChatMemberStatus.LEFT: 'LEFT',
+                           x == ChatMemberStatus.BANNED: 'BANNED'
+    }.get(True)
+    return chat_member_status

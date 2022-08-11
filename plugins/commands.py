@@ -8,8 +8,8 @@ from presets import Presets
 from pyrogram.types import Message
 from pyrogram.enums import ParseMode
 from pyrogram.errors import FloodWait
-from library.chat_support import find_msg_id, find_dc, get_chat_type
 from pyrogram import Client, filters, ContinuePropagation, StopPropagation
+from library.chat_support import find_msg_id, find_dc, get_chat_type, get_chat_member_status
 from library.buttons import (reply_markup_start, reply_markup_home, reply_markup_close,
                              reply_markup_cap_cnf, reply_markup_terminate)
 
@@ -50,7 +50,7 @@ async def text_update_or_terminate(client: Bot, message: Message):
             Presets.GET_CHAT_ID_MSG.format(chat_id, message_id), reply_markup=reply_markup_close)
         await message.delete()
         raise StopPropagation
-    elif re.search(regex, message.text):
+    elif message.text and re.search(regex, message.text):
         if message.from_user.id == int(session.id):
             await message.reply_text(Presets.SESSION_START_INFO.format(start_date, time_now),
                                      reply_markup=reply_markup_terminate,
@@ -60,7 +60,7 @@ async def text_update_or_terminate(client: Bot, message: Message):
                                      )
             await message.delete()
             raise StopPropagation
-    elif not message.reply_to_message:
+    elif message.text and not message.reply_to_message:
         await message.reply_text(
             text=Presets.TEXT_UPDATE_MSG,
             reply_to_message_id=message.id,
@@ -165,8 +165,8 @@ async def force_reply_msg(client: Bot, message: Message):
         except Exception:
             pass
         member = await client.USER.get_chat_member(chat_id, user_bot_me.id)
-        if str(chat_status.type) in ('supergroup' or 'group'):
-            if member.status != 'administrator':
+        if str(await get_chat_type(chat_status)) in ('SUPERGROUP' or 'GROUP'):
+            if str(await get_chat_member_status(member)) not in ('ADMINISTRATOR' or 'OWNER'):
                 await client.delete_messages(message.chat.id, b)
                 await message.delete()
                 await bot_msg.edit(Presets.IN_CORRECT_PERMISSIONS_MESSAGE_DEST_POSTING)
@@ -187,7 +187,7 @@ async def force_reply_msg(client: Bot, message: Message):
             await asyncio.sleep(2)
             await start_options(client, message)
         else:
-            if member.privileges.can_post_messages:
+            if member.privileges is not None and member.privileges.can_post_messages:
                 await client.delete_messages(message.chat.id, b)
                 await message.delete()
                 await target_cnf_db(id, chat_id)

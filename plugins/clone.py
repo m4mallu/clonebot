@@ -2,16 +2,16 @@
 import time
 import pytz
 import asyncio
-import datetime
 from bot import Bot
 from math import trunc
 from library.sql import *
 from presets import Presets
+from datetime import datetime
 from pyrogram.types import Message
 from pyrogram.enums import ParseMode
 from pyrogram.errors import FloodWait
 from library.buttons import reply_markup_stop, reply_markup_finished
-from library.chat_support import calc_percentage, calc_progress, save_target_cfg, get_time, set_to_defaults
+from library.chat_support import calc_percentage, calc_progress, save_target_cfg, set_to_defaults, date_time_calc
 #
 bot_start_time = time.time()
 #
@@ -20,8 +20,9 @@ async def clone_medias(bot: Bot, m: Message):
     query = await query_msg(id)
     clone_cancel_key[id] = int(m.id)
     #
-    clone_start_time = time.time()
-    start_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M %p')
+    start_time = time.time()
+    start_date = datetime.today().strftime("%d/%m/%y")
+    clone_start_time = datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M %p')
     #
     file_name = caption = report = str()
     #
@@ -72,8 +73,11 @@ async def clone_medias(bot: Bot, m: Message):
             if not user_message.empty:
                 messages = await bot.USER.get_messages(source_chat, user_message.id, replies=0)
                 msg_id = messages.id
+                cur_time = time.time()
+                cur_date = datetime.today().strftime("%d/%m/%y")
+                days, hours = await date_time_calc(start_date, start_time, cur_date, cur_time)
                 #
-                report = Presets.CLONE_REPORT.format(await get_time(), source_chat, target_chat,
+                report = Presets.CLONE_REPORT.format(time.strftime("%I:%M %p"), source_chat, target_chat,
                                                      "1" if not bool(start_id) else start_id,
                                                      end_msg_id if not bool(msg_id) else msg_id,
                                                      "🟡" if bool(clone_delay) else "🚫",
@@ -126,16 +130,16 @@ async def clone_medias(bot: Bot, m: Message):
                             #
                             total_copied = doc + video + audio + voice + photo + text
                             pct = await calc_percentage(sp, ep, msg_id)
-                            time_taken = time.strftime("%Hh %Mm", time.gmtime(time.time() - clone_start_time))
-                            update_time = datetime.datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M %p')
+                            update_time = datetime.now(pytz.timezone('Asia/Kolkata')).strftime('%I:%M %p')
                             try:
                                 await m.edit(
                                     Presets.MESSAGE_COUNT.format(
                                         int(msg_id),
                                         int(total_copied),
                                         trunc(pct) if pct <= 100 else "- ",
-                                        time_taken,
-                                        start_time,
+                                        days,
+                                        hours,
+                                        clone_start_time,
                                         update_time
                                     ),
                                     parse_mode=ParseMode.HTML,

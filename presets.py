@@ -9,7 +9,7 @@ class Presets(object):
 ├ CMID - {}
 ├ Transfers - {}
 ├ Progress - {} %
-├ Time taken - {}
+├ Time taken - {} {}
 ├ Clone started - {}
 ├ Last updated  - {}</code>
 ├  🔰 <a href='t.me/RMProjects'><b>@RMProjects</b></a> || 🏅 <a href='https://github.com/m4mallu/clonebot-ui'><b>@Github</b></a>
