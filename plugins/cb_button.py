@@ -20,8 +20,9 @@ else:
 
 @Client.on_callback_query(filters.regex(r'^start_btn$'))
 async def start_settings(client: Bot, cb: CallbackQuery):
+    user = await Bot.get_me(self=client.USER)
     id = int(cb.from_user.id)
-    if Config.AUTH_USERS and (id not in Config.AUTH_USERS):
+    if id != int(user.id):
         await cb.answer(Presets.NOT_AUTH_TEXT, show_alert=True)
         return
     await add_user(id)

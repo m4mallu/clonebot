@@ -20,9 +20,6 @@ class Config(object):
     # Get from my.telegram.org
     API_HASH = os.environ.get("API_HASH", "")
 
-    # Authorized users to use this bot
-    AUTH_USERS = set(int(x) for x in os.environ.get("AUTH_USERS", "").split())
-
     # Generate a user session string
     TG_USER_SESSION = os.environ.get("TG_USER_SESSION", "")
 

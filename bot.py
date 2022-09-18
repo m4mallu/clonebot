@@ -36,7 +36,6 @@ class Bot(Client):
     async def start(self):
         await super().start()
         usr_bot_me = await self.get_me()
-        bot_me = self.USER_ID
         self.set_parse_mode(ParseMode.HTML)
         self.LOGGER(__name__).info(
             f"@{usr_bot_me.username}  started! "
