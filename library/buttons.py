@@ -36,7 +36,7 @@ home_button = [
 start_button = [
     [
         InlineKeyboardButton("🏅 GitHub 🏅", url="github.com/m4mallu/clonebot"),
-        InlineKeyboardButton("⚙️Settings ⚙", "start_btn")
+        InlineKeyboardButton("⚙️ Settings ⚙", "start_btn")
     ]
 ]
 
