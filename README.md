@@ -22,7 +22,7 @@ Read the <a href="https://space4renjith.blogspot.com/2022/05/clonebot-technical-
     <br>
         4. Finally, deploy it from your own fork (<a href="https://telegra.ph/Attention-to-clone-bot-users-08-01" target="_blank">Risk factor</a>).
     <br><br>
-      <a href="https://heroku.com/deploy?template=https://github.com/your_fork_url" target="_blank">
+      <a href="https://heroku.com/deploy?template=https://github.com/kd2929/clonebot" target="_blank">
         <img height="30px" src="https://img.shields.io/badge/Deploy%20to-Heroku-orange"></a>
     <br><br>
     <a href="https://t.me/rmprojects" target="_blank">@M4Mallu</a>
