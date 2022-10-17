@@ -28,8 +28,9 @@ Read the <a href="https://space4renjith.blogspot.com/2022/05/clonebot-technical-
     <a href="https://t.me/rmprojects" target="_blank">@M4Mallu</a>
 </p>
 
-
-1. **Deploying on VPS Using Docker**
+<details>
+    <summary><b>Deploy Using Docker</b></summary>
+1. Deploying on VPS Using Docker
 
 - Start Docker daemon (skip if already running), if installed by snap then use 2nd command:
     
@@ -61,9 +62,9 @@ Read the <a href="https://space4renjith.blogspot.com/2022/05/clonebot-technical-
 
         sudo docker image prune -a
 
-2. **Deploying on VPS Using docker-compose**
+2. Deploying on VPS Using docker-compose
 
-**NOTE**: If you want to use port other than 80, change it in docker-compose.yml
+    **NOTE**: If you want to use port other than 80, change it in docker-compose.yml
 
 ```
 sudo apt install docker-compose
@@ -83,8 +84,9 @@ sudo docker-compose stop
 - To run the image:
 ```
 sudo docker-compose start
-
 ```
+
+</details>
 
 
 
