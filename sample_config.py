@@ -1,4 +1,5 @@
 #----------------------------------- https://github.com/m4mallu/clonebot --------------------------------------------#
+from dotenv import load_dotenv
 import os
 import logging
 
@@ -8,23 +9,24 @@ logging.basicConfig(
     datefmt='%d-%b-%y %H:%M:%S',
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
+load_dotenv()
 
 class Config(object):
 
     # Get a bot token from botfather
-    TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
+    TG_BOT_TOKEN = os.getenv("TG_BOT_TOKEN", "")
 
     # Get from my.telegram.org
-    APP_ID = int(os.environ.get("APP_ID", ""))
+    APP_ID = int(os.getenv("APP_ID", ""))
 
     # Get from my.telegram.org
-    API_HASH = os.environ.get("API_HASH", "")
+    API_HASH = os.getenv("API_HASH", "")
 
     # Generate a user session string
-    TG_USER_SESSION = os.environ.get("TG_USER_SESSION", "")
+    TG_USER_SESSION = os.getenv("TG_USER_SESSION", "")
 
     # Database URI
-    DB_URI = os.environ.get("DATABASE_URL", "")
+    DB_URI = os.getenv("DATABASE_URL", "")
 
 
 def LOGGER(name: str) -> logging.Logger:

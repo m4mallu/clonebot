@@ -1,5 +1,6 @@
 # ----------------------------------- https://github.com/m4mallu/clonebot ---------------------------------------------#
 import sys
+import os
 from bot import Bot
 from library.sql import *
 from presets import Presets
@@ -11,11 +12,13 @@ from library.chat_support import del_user_cfg
 from plugins.cb_input import update_type_buttons
 from plugins.commands import reply_markup_home
 from plugins.index_files import index_target_chat, purge_media
+# from dotenv import load_dotenv
 
-if bool(os.environ.get("ENV", False)):
-    from sample_config import Config
-else:
-    from config import Config
+# load_dotenv()
+# if bool(os.getenv("ENV", False)):
+#     from sample_config import Config
+# else:
+#     from config import Config
 
 
 @Client.on_callback_query(filters.regex(r'^start_btn$'))

@@ -5,9 +5,12 @@ from user import User
 from pyrogram import Client
 from presets import Presets as Msg
 from pyrogram.enums import ParseMode
+from dotenv import load_dotenv
 
 
-if bool(os.environ.get("ENV", False)):
+
+load_dotenv()
+if bool(os.getenv("ENV")):
     from sample_config import Config
     from sample_config import LOGGER
 else:
