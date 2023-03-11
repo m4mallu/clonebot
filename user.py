@@ -5,10 +5,10 @@ from pyrogram.enums import ParseMode
 
 if os.environ.get("ENV", False):
     from sample_config import Config
-    from sample_config import LOGGER
+    from sample_config import logger
 else:
     from config import Config
-    from config import LOGGER
+    from config import logger
 
 class User(Client):
     def __init__(self):
@@ -19,17 +19,17 @@ class User(Client):
             api_id=Config.APP_ID,
             workers=4
         )
-        self.LOGGER = LOGGER
+        self.logger = logger
 
     async def start(self):
         await super().start()
         usr_bot_me = await self.get_me()
         self.set_parse_mode(ParseMode.HTML)
-        self.LOGGER(__name__).info(
+        self.logger(__name__).info(
             f"@{usr_bot_me.username}  started!"
         )
         return self, usr_bot_me.id
 
     async def stop(self, *args):
         await super().stop()
-        self.LOGGER(__name__).info("Bot stopped. Bye.")
+        self.logger(__name__).info("Bot stopped. Bye.")

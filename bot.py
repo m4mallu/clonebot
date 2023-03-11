@@ -9,16 +9,17 @@ from pyrogram.enums import ParseMode
 
 if bool(os.environ.get("ENV", False)):
     from sample_config import Config
-    from sample_config import LOGGER
+    from sample_config import logger
 else:
     from config import Config
-    from config import LOGGER
+    from config import logger
 
 
 class Bot(Client):
     USER: User = None
     USER_ID: int = None
 
+class Config:
     def __init__(self):
         super().__init__(
             name="bot_session",
@@ -31,13 +32,13 @@ class Bot(Client):
                 "root": "plugins"
             }
         )
-        self.LOGGER = LOGGER
+        self.logger = logger
 
     async def start(self):
         await super().start()
         usr_bot_me = await self.get_me()
         self.set_parse_mode(ParseMode.HTML)
-        self.LOGGER(__name__).info(
+        self.logger(__name__).info(
             f"@{usr_bot_me.username}  started! "
         )
         self.USER, self.USER_ID = await User().start()
@@ -49,4 +50,4 @@ class Bot(Client):
 
     async def stop(self, *args):
         await super().stop()
-        self.LOGGER(__name__).info("Bot stopped. Bye.")
+        self.logger(__name__).info("Bot stopped. Bye.")
