@@ -12,18 +12,7 @@ Read the <a href="https://space4renjith.blogspot.com/2022/05/clonebot-technical-
     <br>
         <b>DUE TO SOME SECURITY REASONS, DEPLOY TO HEROKU FROM THIS REPOSITORY HAS BEEN ABOLISHED !</b>
     <br>
-        <s>To deploy this bot in heroku, you may need to follow the steps mentioned below</s>
-    <br><br>
-        1. Fork this Repository first.
-    <br>
-        2. Change the <a href="https://github.com/m4mallu/clonebot/blob/master/app.json#L7" target="_blank"> app.json </a> 'repository' URL to your fork URL.
-    <br>
-        3. Change the <a href="https://github.com/m4mallu/clonebot/blob/master/README.md?plain=1#L25" target="_blank"> deploy button </a> URL to your fork URL.
-    <br>
-        4. Finally, deploy it from your own fork (<a href="https://telegra.ph/Attention-to-clone-bot-users-08-01" target="_blank">Risk factor</a>).
-    <br><br>
-      <a href="https://heroku.com/deploy?template=https://github.com/your_fork_url" target="_blank">
-        <img height="30px" src="https://img.shields.io/badge/Deploy%20to-Heroku-orange"></a>
+        <u>This repository is no longer supporting Heroku deployment. Use a paid VPS / Raspberry Pi / Local pc instead. See the documentation for more.</u>
     <br><br>
     <a href="https://t.me/rmprojects" target="_blank">@M4Mallu</a>
 </p>
