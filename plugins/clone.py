@@ -45,7 +45,7 @@ async def clone_medias(bot: Bot, m: Message):
     else:
         delay = 3
     #
-    # The vaulues will be swithed if the start message id is greater than the end message id
+    # The values will be switched if the start message id is greater than the end message id
     if start_id > end_id:
         start_id = start_id ^ end_id
         end_id = end_id ^ start_id

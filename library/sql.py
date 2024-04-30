@@ -1,10 +1,9 @@
-import os
 import threading
+from config import Config
 from sqlalchemy import create_engine
 from sqlalchemy import Column, Boolean, Numeric
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
-
 
 clone_cancel_key = {}       # Clone cancel status key
 clone_btn_count = {}        # Clone button single click actuator key
@@ -14,11 +13,6 @@ purge_skip_key = {}         # Purge function key
 custom_caption = {}         # Custom caption key
 master_index = []           # Unique id index of cloning medias (including target chat)
 file_types = ["document", "video", "audio", "voice", "photo", "text"]
-
-if bool(os.environ.get("ENV", False)):
-    from sample_config import Config
-else:
-    from config import Config
 
 def start() -> scoped_session:
     engine = create_engine(Config.DB_URI, client_encoding="utf8")

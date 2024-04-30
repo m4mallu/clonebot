@@ -1,5 +1,4 @@
 #----------------------------------- https://github.com/m4mallu/clonebot --------------------------------------------#
-import os
 import logging
 
 logging.basicConfig(
@@ -12,19 +11,19 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 class Config(object):
 
     # Get a bot token from botfather
-    TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
+    TG_BOT_TOKEN = "Your_Telegram_bot_token"
 
     # Get from my.telegram.org
-    APP_ID = int(os.environ.get("APP_ID", ""))
+    APP_ID = int(Your_telegram_App_Id)
 
     # Get from my.telegram.org
-    API_HASH = os.environ.get("API_HASH", "")
+    API_HASH = "Your_Telegram_Api_Hash"
 
     # Generate a user session string
-    TG_USER_SESSION = os.environ.get("TG_USER_SESSION", "")
+    TG_USER_SESSION = "Your_user_session_string_compatible_with_Pyrogram_v2"
 
     # Database URI
-    DB_URI = os.environ.get("DATABASE_URL", "")
+    DB_URI = "Your_database_URI"
 
 
 def LOGGER(name: str) -> logging.Logger:

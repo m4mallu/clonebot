@@ -179,6 +179,6 @@ Ended at Id   - {}
 
 <u><b>Credits:</u></b> https://github.com/m4mallu
 """
-    GET_CHAT_ID_MSG = "<b>You have been forwaded a message\nfrom a chat having the id:</b>\n\n<code>{" \
+    GET_CHAT_ID_MSG = "<b>You have been forwarded a message\nfrom a chat having the id:</b>\n\n<code>{" \
                       "}</code>\n<b>Message Id: </b><code>{}</code>\n\n<i>Tap the above text to copy !</i> "
-    CLONE_REPORT_INFO = "A report has been generted in your SAVED MESSAGES folder. Thanks for using this bot 🤝"
+    CLONE_REPORT_INFO = "A report has been generated in your SAVED MESSAGES folder. Thanks for using this bot 🤝"

@@ -1,4 +1,5 @@
 # ----------------------------------- https://github.com/m4mallu/clonebot ---------------------------------------------#
+import os
 import sys
 from bot import Bot
 from library.sql import *
@@ -11,12 +12,6 @@ from library.chat_support import del_user_cfg
 from plugins.cb_input import update_type_buttons
 from plugins.commands import reply_markup_home
 from plugins.index_files import index_target_chat, purge_media
-
-if bool(os.environ.get("ENV", False)):
-    from sample_config import Config
-else:
-    from config import Config
-
 
 @Client.on_callback_query(filters.regex(r'^start_btn$'))
 async def start_settings(client: Bot, cb: CallbackQuery):

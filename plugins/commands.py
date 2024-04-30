@@ -76,7 +76,6 @@ async def force_reply_msg(client: Bot, message: Message):
     chat_info = message.text
     id = int(message.from_user.id)
     chat_status = []
-    member_status = []
     user_bot_me = await client.USER.get_me()
     query = await query_msg(id)
     a = int(query.s_chat_msg_id)

@@ -1,18 +1,12 @@
 #----------------------------------- https://github.com/m4mallu/clonebot --------------------------------------------#
-import os
 import sys
 from user import User
 from pyrogram import Client
 from presets import Presets as Msg
 from pyrogram.enums import ParseMode
 
-
-if bool(os.environ.get("ENV", False)):
-    from sample_config import Config
-    from sample_config import LOGGER
-else:
-    from config import Config
-    from config import LOGGER
+from config import Config
+from config import LOGGER
 
 
 class Bot(Client):

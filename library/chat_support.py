@@ -102,7 +102,7 @@ async def date_time_calc(start_date, start_time, cur_date, cur_time):
     return f'{date_diff}D', time_diff
 
 
-# Functions to set the bot vaiables to default values
+# Functions to set the bot variables to default values
 async def set_to_defaults(id):
     await reset_all(id)
     file_types.clear()
